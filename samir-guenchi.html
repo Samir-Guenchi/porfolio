@@ -1,315 +1,449 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Samir Guenchi — Systems, Data & AI</title>
-<meta name="description" content="Scalable software architecture, data science, and competitive programming with rigorous case studies and proofs." />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Samir Guenchi — AI Systems & Arabic NLP</title>
+<meta name="description" content="Building intelligent systems for Arabic NLP, RAG pipelines, and competitive programming. Research-driven portfolio by Samir Guenchi.">
+
+<!-- Replace FILE_ID with your Google Drive CV file ID -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
-  :root{
-    --bg:#0b1116;
-    --panel:#0f1620;
-    --ink:#e6eefc;
-    --muted:#9fb0c9;
-    --brand:#7dd3fc;
-    --accent:#a78bfa;
-    --ok:#34d399;
-    --warn:#f59e0b;
-    --radius:20px;
-    --ring:0 0 0 3px rgba(125,211,252,.25);
-  }
-  *{box-sizing:border-box}
-  html,body{height:100%}
-  body{
-    margin:0;
-    font:16px/1.65 Inter, ui-sans-serif, system-ui, Segoe UI, Roboto, Arial;
-    color:var(--ink);
-    background:
-      radial-gradient(900px 600px at -10% -10%, rgba(125,211,252,.10), transparent 60%),
-      radial-gradient(900px 600px at 110% 10%, rgba(167,139,250,.10), transparent 60%),
-      linear-gradient(180deg,#0b1116,#0a0f14 60%, #0b1116);
-  }
+:root{
+  --ink:#0d1b2a; --paper:#f8f6f3; --pencil:#556270; --highlight:#ffc759;
+  --accent:#e07a5f; --success:#81b29a; --link:#3d5a80;
+  --shadow:0 2px 8px rgba(13,27,42,.08);
+  --radius:4px; --transition:.18s ease;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:17px}
+body{
+  font-family:Inter,ui-sans-serif,system-ui,sans-serif;
+  background:var(--paper);color:var(--ink);line-height:1.65;
+  background-image:
+    repeating-linear-gradient(0deg,transparent,transparent 32px,rgba(13,27,42,.02) 32px,rgba(13,27,42,.02) 33px);
+}
+::selection{background:var(--highlight);color:var(--ink)}
 
-  /* Organic header wash */
-  .wash{
-    position:fixed; inset:auto -40vw calc(100% - 180px) -40vw; height:340px;
-    transform:rotate(-4deg);
-    background:
-      radial-gradient(120px 70px at 25% 60%, rgba(125,211,252,.35), transparent 70%),
-      radial-gradient(180px 90px at 70% 40%, rgba(167,139,250,.35), transparent 70%),
-      linear-gradient(90deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
-    filter:blur(28px); pointer-events:none; z-index:-1;
-  }
+/* Handwritten header */
+header{
+  position:sticky;top:0;z-index:100;background:rgba(248,246,243,.95);
+  backdrop-filter:blur(12px);border-bottom:2px solid var(--ink);
+  box-shadow:0 4px 12px rgba(13,27,42,.06);
+}
+.hdr{
+  max-width:1200px;margin:0 auto;padding:18px 20px;
+  display:flex;justify-content:space-between;align-items:center;
+}
+.logo{
+  font:700 24px/1 'Caveat',cursive;color:var(--ink);text-decoration:none;
+  position:relative;
+}
+.logo:after{
+  content:'';position:absolute;bottom:-4px;left:0;right:0;height:3px;
+  background:repeating-linear-gradient(90deg,var(--accent),var(--accent) 8px,transparent 8px,transparent 12px);
+}
+nav{display:flex;gap:28px;align-items:center}
+nav a{
+  color:var(--pencil);text-decoration:none;font-weight:500;
+  position:relative;transition:color var(--transition);
+}
+nav a:hover{color:var(--accent)}
+nav a:before{
+  content:'';position:absolute;bottom:-6px;left:0;width:0;height:2px;
+  background:var(--accent);transition:width .25s ease;
+}
+nav a:hover:before{width:100%}
+.cv-btn{
+  padding:8px 16px;background:var(--accent);color:var(--paper);
+  border-radius:var(--radius);font-weight:600;
+  box-shadow:2px 2px 0 var(--ink);transition:transform var(--transition),box-shadow var(--transition);
+}
+.cv-btn:hover{transform:translate(-1px,-1px);box-shadow:3px 3px 0 var(--ink)}
 
-  header{
-    max-width:1120px; margin:28px auto 0; padding:0 20px;
-    display:flex; align-items:center; justify-content:space-between;
-  }
-  .brand{display:flex; align-items:center; gap:12px; text-decoration:none; color:var(--ink)}
-  .badge{
-    width:42px;height:42px;border-radius:50%;
-    background:conic-gradient(from 220deg, var(--brand), var(--accent), var(--brand));
-    border:1px solid rgba(255,255,255,.14);
-    box-shadow:0 10px 36px rgba(125,211,252,.28);
-  }
-  nav ul{display:flex; gap:10px; list-style:none; padding:0; margin:0}
-  nav a{color:var(--ink); text-decoration:none; padding:.55rem 1rem; border-radius:999px; transition:.18s}
-  nav a:hover{background:rgba(255,255,255,.06)}
-  .btn{
-    background:linear-gradient(135deg,var(--brand),var(--accent));
-    color:#041019; font-weight:700; border-radius:999px; padding:.65rem 1rem;
-    box-shadow:0 10px 30px rgba(125,211,252,.28);
-  }
-  .ghost{background:transparent; border:1px solid rgba(255,255,255,.18); color:var(--ink)}
-  .btn:focus-visible{outline:none; box-shadow:var(--ring)}
+/* Hero */
+.hero{
+  max-width:1200px;margin:0 auto;padding:80px 20px 60px;
+  display:grid;grid-template-columns:1.2fr 1fr;gap:48px;align-items:start;
+}
+.sketch{
+  background:white;padding:32px;border-radius:8px;
+  border:2px dashed var(--pencil);box-shadow:var(--shadow);
+  position:relative;
+}
+.sketch:before{
+  content:'[ lab notes — 2025.10.28 ]';
+  position:absolute;top:-14px;left:20px;background:var(--paper);
+  padding:0 8px;font:12px 'JetBrains Mono',monospace;color:var(--pencil);
+}
+h1{
+  font:700 clamp(32px,5vw,48px)/1.15 'Caveat',cursive;
+  margin-bottom:12px;color:var(--ink);
+}
+.hi{color:var(--accent)}
+.role{
+  font:600 18px/1.4 Inter;color:var(--pencil);margin-bottom:24px;
+}
+.bio{margin-bottom:24px;color:var(--pencil)}
+.tags{display:flex;flex-wrap:wrap;gap:8px}
+.tag{
+  padding:6px 12px;background:var(--highlight);color:var(--ink);
+  border-radius:var(--radius);font:500 14px 'JetBrains Mono',monospace;
+  border:1px solid rgba(13,27,42,.12);
+}
 
-  .hero{
-    max-width:1120px; margin:18px auto 34px; padding:20px;
-    display:grid; grid-template-columns:110px 1fr; gap:20px; align-items:center;
-  }
-  .headshot{
-    width:110px; height:110px; border-radius:26px; object-fit:cover;
-    border:1px solid rgba(255,255,255,.12); box-shadow:0 16px 38px rgba(0,0,0,.35);
-  }
-  h1{font-size:clamp(24px,3.8vw,36px); margin:.2rem 0}
-  .lead{color:var(--muted); margin-top:6px}
-  .cta{display:flex; gap:10px; margin-top:14px; flex-wrap:wrap}
+/* Side sketch */
+.side-sketch{
+  background:white;padding:24px;border-radius:8px;
+  border:2px solid var(--ink);box-shadow:4px 4px 0 var(--accent);
+  font:16px/1.5 'Caveat',cursive;color:var(--pencil);
+  position:relative;
+}
+.side-sketch:before{
+  content:'?';position:absolute;top:8px;right:12px;
+  width:28px;height:28px;border-radius:50%;border:2px solid var(--accent);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:700;color:var(--accent);
+}
+.side-sketch h3{font-size:20px;margin-bottom:12px;color:var(--ink)}
+.side-sketch ul{list-style:none;margin-top:12px}
+.side-sketch li{
+  padding-left:18px;position:relative;margin-bottom:6px;
+}
+.side-sketch li:before{
+  content:'→';position:absolute;left:0;color:var(--accent);font-weight:700;
+}
 
-  main{max-width:1120px; margin:0 auto; padding:0 20px 80px}
-  section{margin:40px 0}
-  h2{font-size:clamp(20px,2.2vw,26px); margin:0 0 8px}
-  .sub{color:var(--muted); margin:0 0 18px}
+/* Projects — notebook card style */
+.projects{max-width:1200px;margin:0 auto;padding:60px 20px}
+.sec-title{
+  font:700 36px/1.2 'Caveat',cursive;margin-bottom:8px;
+  position:relative;display:inline-block;
+}
+.sec-title:after{
+  content:'';position:absolute;bottom:-6px;left:0;right:0;height:4px;
+  background:repeating-linear-gradient(90deg,var(--accent),var(--accent) 12px,transparent 12px,transparent 18px);
+}
+.sec-sub{color:var(--pencil);margin-bottom:40px}
 
-  /* CASES */
-  .case{
-    background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.02));
-    border:1px solid rgba(255,255,255,.10);
-    border-radius: var(--radius);
-    padding:18px; margin:16px 0 22px;
-    backdrop-filter:blur(6px);
-    transition:transform .18s ease, border-color .18s ease;
-  }
-  .case:hover{transform:translateY(-3px); border-color:rgba(255,255,255,.26)}
-  .case h3{margin:0 0 4px}
-  .meta{color:var(--muted); font-size:.95rem; margin:0 0 12px}
-  .grid{display:grid; grid-template-columns:1.1fr .9fr; gap:18px}
-  .bullets{padding-left:18px; margin:6px 0 10px}
-  .bullets li{margin:6px 0}
-  figure{margin:0}
-  figure img{
-    width:100%; height:100%; object-fit:cover; border-radius:14px;
-    border:1px solid rgba(255,255,255,.10)
-  }
-  figcaption{color:var(--muted); font-size:.9rem; margin-top:6px}
+.grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:32px;
+}
+.card{
+  background:white;padding:24px;border-radius:8px;
+  border:2px solid var(--ink);box-shadow:var(--shadow);
+  position:relative;transition:transform var(--transition),box-shadow var(--transition);
+}
+.card:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--accent)}
+.card-label{
+  position:absolute;top:-12px;left:16px;padding:4px 10px;
+  background:var(--highlight);border:1px solid var(--ink);
+  border-radius:var(--radius);font:600 12px 'JetBrains Mono',monospace;
+}
+.card h3{font:600 22px/1.3 Inter;margin-bottom:12px;color:var(--ink)}
+.card p{color:var(--pencil);margin-bottom:16px;font-size:15px}
+.tech{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px}
+.tech span{
+  padding:4px 10px;background:rgba(61,90,128,.08);color:var(--link);
+  border-radius:999px;font:500 13px 'JetBrains Mono',monospace;
+}
+.card a{
+  display:inline-flex;align-items:center;gap:6px;color:var(--accent);
+  text-decoration:none;font-weight:600;font-size:15px;
+}
+.card a:hover{text-decoration:underline}
 
-  /* Skills with proof */
-  .skills{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:10px}
-  .chip{
-    display:flex; justify-content:space-between; align-items:center; gap:12px;
-    background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.10);
-    border-radius:999px; padding:11px 14px;
-  }
-  .chip a{color:var(--brand); text-decoration:none}
+/* Experience timeline — notebook tabs */
+.exp{background:rgba(129,178,154,.05);padding:60px 20px}
+.timeline{max-width:900px;margin:0 auto}
+.tab{
+  background:white;padding:24px 24px 24px 40px;margin-bottom:24px;
+  border-left:4px solid var(--accent);border-radius:var(--radius);
+  box-shadow:var(--shadow);position:relative;
+}
+.tab:before{
+  content:'';position:absolute;left:-10px;top:20px;
+  width:12px;height:12px;background:var(--accent);border-radius:50%;
+  border:3px solid var(--paper);
+}
+.tab h3{font:600 20px/1.3 Inter;margin-bottom:8px}
+.meta{
+  display:flex;gap:16px;font:500 14px 'JetBrains Mono',monospace;
+  color:var(--pencil);margin-bottom:12px;flex-wrap:wrap;
+}
+.tab ul{margin-top:12px;padding-left:20px;color:var(--pencil)}
+.tab li{margin-bottom:6px}
 
-  .now{background:linear-gradient(180deg, rgba(52,211,153,.12), rgba(255,255,255,.02));
-    border:1px solid rgba(52,211,153,.25); border-radius:16px; padding:14px}
+/* Contact — sticky note style */
+.contact{max-width:1200px;margin:0 auto;padding:60px 20px}
+.contact-grid{display:grid;grid-template-columns:1fr 1.5fr;gap:40px}
+.note{
+  background:linear-gradient(135deg,#ffc759,#f4a947);
+  padding:28px;border-radius:8px;box-shadow:3px 3px 8px rgba(13,27,42,.15);
+  border:2px solid rgba(13,27,42,.1);font-size:15px;color:var(--ink);
+  position:relative;transform:rotate(-1deg);
+}
+.note h3{font:700 24px/1.3 'Caveat',cursive;margin-bottom:12px}
+.note a{color:var(--ink);text-decoration:underline;font-weight:600}
+.socials{display:flex;gap:12px;margin-top:16px}
+.social{
+  width:44px;height:44px;background:white;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  border:2px solid var(--ink);text-decoration:none;color:var(--ink);
+  transition:transform var(--transition);font-size:18px;
+}
+.social:hover{transform:scale(1.1) rotate(5deg)}
 
-  footer{opacity:.7; padding:28px 20px; border-top:1px dashed rgba(255,255,255,.12); text-align:center}
+/* Form */
+.form{background:white;padding:32px;border-radius:8px;border:2px dashed var(--pencil);box-shadow:var(--shadow)}
+.fg{margin-bottom:20px}
+label{display:block;font-weight:600;margin-bottom:6px;font-size:15px}
+input,textarea{
+  width:100%;padding:12px;border:2px solid var(--pencil);
+  border-radius:var(--radius);font-family:inherit;font-size:15px;
+  transition:border-color var(--transition);
+}
+input:focus,textarea:focus{outline:none;border-color:var(--accent)}
+textarea{resize:vertical;min-height:120px}
+.submit{
+  width:100%;padding:12px;background:var(--accent);color:var(--paper);
+  border:none;border-radius:var(--radius);font-weight:700;font-size:16px;
+  cursor:pointer;box-shadow:2px 2px 0 var(--ink);
+  transition:transform var(--transition),box-shadow var(--transition);
+}
+.submit:hover{transform:translate(-1px,-1px);box-shadow:3px 3px 0 var(--ink)}
 
-  /* Micro underline */
-  a.link{position:relative; color:var(--brand); text-decoration:none; padding-bottom:1px}
-  a.link:after{
-    content:""; position:absolute; left:0; right:0; bottom:-2px; height:2px;
-    background:linear-gradient(90deg, var(--brand), var(--accent));
-    transform:scaleX(.0); transform-origin:left; transition:transform .18s ease
-  }
-  a.link:hover:after{transform:scaleX(1)}
+/* Footer */
+footer{
+  background:var(--ink);color:var(--paper);padding:32px 20px;text-align:center;
+}
+footer a{color:var(--highlight);text-decoration:none}
 
-  /* Responsive */
-  @media (max-width:860px){
-    .grid{grid-template-columns:1fr}
-    .hero{grid-template-columns:80px 1fr}
-    .headshot{width:80px;height:80px;border-radius:18px}
-    nav ul{display:none}
-  }
+/* Responsive */
+@media (max-width:960px){
+  .hero{grid-template-columns:1fr;gap:32px}
+  .contact-grid{grid-template-columns:1fr}
+  .grid{grid-template-columns:1fr}
+  nav{display:none} /* Mobile nav omitted for brevity—add hamburger if needed */
+}
+@media (max-width:640px){
+  html{font-size:15px}
+  h1{font-size:32px}
+}
 </style>
 </head>
 <body>
 
-<div class="wash" aria-hidden="true"></div>
-
 <header>
-  <a class="brand" href="#top" aria-label="Home">
-    <span class="badge" aria-hidden="true"></span>
-    <strong>Samir Guenchi</strong>
-  </a>
-  <nav aria-label="Primary">
-    <ul>
-      <li><a href="#work">Work</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#now">Now</a></li>
-      <li><a href="#contact">Contact</a></li>
-      <!-- Replace FILE_ID with your Drive file id -->
-      <li><a class="btn" href="https://drive.google.com/uc?export=download&id=FILE_ID" download>Download CV</a></li>
-    </ul>
-  </nav>
+  <div class="hdr">
+    <a class="logo" href="#top">Samir Guenchi</a>
+    <nav>
+      <a href="#projects">Projects</a>
+      <a href="#experience">Experience</a>
+      <a href="#contact">Contact</a>
+      <!-- Replace FILE_ID with your actual Google Drive file ID -->
+      <a class="cv-btn" href="https://drive.google.com/uc?export=download&id=FILE_ID" download>Download CV</a>
+    </nav>
+  </div>
 </header>
 
-<section id="top" class="hero">
-  <img class="headshot" src="assets/headshot.jpg" alt="Portrait" />
-  <div>
-    <h1>Designing scalable, intelligent systems</h1>
-    <p class="lead">Software architecture and data science with measurable results; competitive programming mindset and strong systems thinking.</p>
-    <div class="cta">
-      <a class="btn" href="#work">See case studies</a>
-      <a class="ghost" href="mailto:you@example.com">Contact</a>
+<section class="hero" id="top">
+  <div class="sketch">
+    <h1><span class="hi">Hey, I'm Samir</span> — building intelligent systems for Arabic NLP</h1>
+    <p class="role">AI/ML Engineer • Competitive Programmer • RAG Systems Specialist</p>
+    <p class="bio">
+      CS student at ENSIA researching Arabic Natural Language Processing and building retrieval-augmented generation (RAG) pipelines. 
+      Coach for Algeria's Olympiad in Informatics, training the next generation of problem solvers.
+    </p>
+    <div class="tags">
+      <span class="tag">Python • C++</span>
+      <span class="tag">NLP • RAG</span>
+      <span class="tag">TensorFlow</span>
+      <span class="tag">LangChain</span>
+      <span class="tag">Arabic ML</span>
+    </div>
+  </div>
+
+  <div class="side-sketch">
+    <h3>Current Focus</h3>
+    <p>Q4 2025 research priorities:</p>
+    <ul>
+      <li>Arabic semantic search at scale</li>
+      <li>Grounded RAG evaluation metrics</li>
+      <li>Olympiad prep (IOI 2026)</li>
+      <li>Open to research internships</li>
+    </ul>
+  </div>
+</section>
+
+<section class="projects" id="projects">
+  <h2 class="sec-title">Selected Projects</h2>
+  <p class="sec-sub">Real systems solving real problems — with code and proofs.</p>
+
+  <div class="grid">
+    <article class="card">
+      <span class="card-label">Arabic NLP</span>
+      <h3>Ministry Regulation Q&A</h3>
+      <p>RAG system for accurate Arabic question-answering on government regulations. Built semantic chunking, vector retrieval, and grounded generation pipeline.</p>
+      <div class="tech">
+        <span>Python</span><span>LangChain</span><span>Arabic NLP</span>
+      </div>
+      <a href="https://github.com/Samir-Guenchi/Ministry-Regulation">View on GitHub →</a>
+    </article>
+
+    <article class="card">
+      <span class="card-label">ML Pipeline</span>
+      <h3>BUPA Liver Disorder Analysis</h3>
+      <p>End-to-end ML pipeline with advanced feature engineering, model tuning, and ensemble methods. Achieved 95%+ accuracy with comprehensive evaluation.</p>
+      <div class="tech">
+        <span>Python</span><span>Scikit-learn</span><span>Pandas</span>
+      </div>
+      <a href="https://github.com/Samir-Guenchi/BUPA-Liver-Disorder-Analysis">View on GitHub →</a>
+    </article>
+
+    <article class="card">
+      <span class="card-label">Mobile ML</span>
+      <h3>QR Security Analyzer</h3>
+      <p>Flutter app with on-device ML to classify QR codes as safe or malicious. Uses heuristic security functions and TFLite inference.</p>
+      <div class="tech">
+        <span>Flutter</span><span>Dart</span><span>TFLite</span>
+      </div>
+      <a href="https://github.com/Samir-Guenchi/Qr_Analyzer">View on GitHub →</a>
+    </article>
+
+    <article class="card">
+      <span class="card-label">Algorithms</span>
+      <h3>AI Search Visualizer</h3>
+      <p>Interactive visualization of A*, BFS, DFS, and heuristic search. Real-time path rendering and performance metrics for teaching algorithms.</p>
+      <div class="tech">
+        <span>Python</span><span>Pygame</span><span>Algorithms</span>
+      </div>
+      <a href="https://github.com/Samir-Guenchi/Search_Algo">View on GitHub →</a>
+    </article>
+
+    <article class="card">
+      <span class="card-label">Data Science</span>
+      <h3>Bank Marketing Analysis</h3>
+      <p>Predictive modeling for marketing campaign outcomes. Full pipeline from EDA to deployment-ready model with evaluation dashboard.</p>
+      <div class="tech">
+        <span>Python</span><span>Pandas</span><span>ML</span>
+      </div>
+      <a href="https://github.com/Samir-Guenchi/Bank-marketing-analysis">View on GitHub →</a>
+    </article>
+
+    <article class="card">
+      <span class="card-label">Blockchain</span>
+      <h3>Blockchain Experiments</h3>
+      <p>Smart contracts, consensus mechanisms, and decentralized apps exploring Web3 primitives and cryptographic protocols.</p>
+      <div class="tech">
+        <span>Solidity</span><span>Web3.js</span><span>Crypto</span>
+      </div>
+      <a href="https://github.com/Samir-Guenchi/Blockchain">View on GitHub →</a>
+    </article>
+  </div>
+</section>
+
+<section class="exp" id="experience">
+  <div class="timeline">
+    <h2 class="sec-title">Experience</h2>
+    <p class="sec-sub">Building, teaching, and researching at the intersection of AI and education.</p>
+
+    <div class="tab">
+      <h3>🏆 Coach — Algerian Olympiad in Informatics</h3>
+      <div class="meta"><span>2023–Present</span><span>National Team</span></div>
+      <p>Training 20+ students in competitive programming, algorithms, and problem-solving for IOI and regional contests.</p>
+      <ul>
+        <li>Graph theory, dynamic programming, and advanced data structures</li>
+        <li>Prepared students for top rankings in national competitions</li>
+        <li>Developed training materials and curated practice problem sets</li>
+      </ul>
+    </div>
+
+    <div class="tab">
+      <h3>🤖 Research Member — ENSIA-AI Lab</h3>
+      <div class="meta"><span>2022–Present</span><span>Research</span></div>
+      <p>Conducting research in Arabic NLP, retrieval-augmented generation, and ML applications for low-resource languages.</p>
+      <ul>
+        <li>Arabic text processing and semantic search</li>
+        <li>RAG systems evaluation and grounding metrics</li>
+        <li>Collaborating on AI research papers and open-source contributions</li>
+      </ul>
+    </div>
+
+    <div class="tab">
+      <h3>🎓 Computer Science Student — ENSIA</h3>
+      <div class="meta"><span>2021–Present</span><span>Algiers, Algeria</span></div>
+      <p>Specializing in AI and Machine Learning with focus on natural language processing and intelligent systems.</p>
+      <ul>
+        <li>Academic excellence in AI/ML coursework</li>
+        <li>Active in student organizations and tech clubs (EBEC)</li>
+        <li>Leading multiple technical and research projects</li>
+      </ul>
     </div>
   </div>
 </section>
 
-<main>
-  <section id="work" aria-labelledby="work-title">
-    <h2 id="work-title">Selected work</h2>
-    <p class="sub">Three focused case studies with problem, approach, and outcomes for credible evidence in quick reviews.</p>
+<section class="contact" id="contact">
+  <h2 class="sec-title">Get in Touch</h2>
+  <p class="sec-sub">Open for research collaborations, internships, and technical discussions.</p>
 
-    <!-- Case 1 -->
-    <article class="case">
-      <h3>RAG Platform for Public Data</h3>
-      <p class="meta">Role: Architect & ML Engineer • Stack: Python, FastAPI, Vector DB, Observability</p>
-      <div class="grid">
-        <div>
-          <h4>Problem</h4>
-          <p>Unify scattered documents and deliver grounded answers with p95 latency under 500 ms for citizen‑facing queries.</p>
-          <h4>Approach</h4>
-          <ul class="bullets">
-            <li>ETL pipeline with text normalization, chunking, and semantic indexing.</li>
-            <li>Retriever evaluation harness with grounding metrics and AB tests.</li>
-            <li>Blueprint: API gateway, vector store, worker pool, and drift alerts.</li>
-          </ul>
-          <h4>Outcome</h4>
-          <ul class="bullets">
-            <li>p95 latency cut from 1.2 s to 420 ms; grounded answer rate +18%.</li>
-            <li>Ops dashboard reduced on‑call incidents by 22% month‑over‑month.</li>
-          </ul>
-          <p><a class="link" href="https://github.com/youruser/rag-platform">Code</a> ·
-             <a class="link" href="assets/rag-architecture.pdf">Architecture</a> ·
-             <a class="link" href="assets/rag-demo.mp4">Demo</a></p>
-        </div>
-        <figure>
-          <img src="assets/rag-diagram.png" alt="Service blueprint with gateway, vector DB, workers, and monitors." />
-          <figcaption>Service blueprint and data flow.</figcaption>
-        </figure>
+  <div class="contact-grid">
+    <div class="note">
+      <h3>Let's connect!</h3>
+      <p><strong>Email:</strong> <a href="mailto:samir.guenchi@ensia.edu.dz">samir.guenchi@ensia.edu.dz</a></p>
+      <p><strong>Location:</strong> Maghnia, Tlemcen, Algeria 🇩🇿</p>
+      <p><strong>Status:</strong> Open for internships & research positions</p>
+      <div class="socials">
+        <a href="https://www.linkedin.com/in/guenchi-samir-34880223b" class="social" title="LinkedIn">in</a>
+        <a href="https://github.com/Samir-Guenchi" class="social" title="GitHub">gh</a>
+        <a href="https://www.kaggle.com/guenchisamir" class="social" title="Kaggle">kg</a>
+        <a href="https://codeforces.com/profile/Guenchi_Samir_ia" class="social" title="Codeforces">cf</a>
       </div>
-    </article>
-
-    <!-- Case 2 -->
-    <article class="case">
-      <h3>IoT Telemetry to Decisions</h3>
-      <p class="meta">Role: Systems Engineer • Stack: MQTT, Timeseries DB, Spark, IaC</p>
-      <div class="grid">
-        <div>
-          <h4>Problem</h4>
-          <p>Stream edge telemetry reliably and surface actionable insights near real‑time for operations teams.</p>
-          <h4>Approach</h4>
-          <ul class="bullets">
-            <li>Edge buffering with backpressure and schema evolution strategy.</li>
-            <li>Anomaly scoring with feature windows and alert routing.</li>
-            <li>Blue‑green rollouts and cost guardrails via autoscaling.</li>
-          </ul>
-          <h4>Outcome</h4>
-          <ul class="bullets">
-            <li>99.95% ingestion uptime and 24% faster alerts to operators.</li>
-            <li>Infra cost −17% through tiered storage and adaptive scaling.</li>
-          </ul>
-          <p><a class="link" href="https://github.com/youruser/iot-pipeline">Code</a> ·
-             <a class="link" href="assets/iot-dashboard.png">Dashboard</a></p>
-        </div>
-        <figure>
-          <img src="assets/iot-graph.png" alt="Timeseries visualization with detected anomalies." />
-          <figcaption>Timeseries anomalies and SLA panel.</figcaption>
-        </figure>
-      </div>
-    </article>
-
-    <!-- Case 3 -->
-    <article class="case">
-      <h3>Contest Algorithms Toolkit</h3>
-      <p class="meta">Role: CP Competitor • Stack: C++ / Python, CI Benchmarks</p>
-      <div class="grid">
-        <div>
-          <h4>Problem</h4>
-          <p>Speed up solving for ICPC‑style categories with tested, reusable templates and micro‑benchmarks.</p>
-          <h4>Approach</h4>
-          <ul class="bullets">
-            <li>Template library with CI tests and perf checks.</li>
-            <li>Postmortems and heuristics per category to capture learning.</li>
-          </ul>
-          <h4>Outcome</h4>
-          <ul class="bullets">
-            <li>~30% average reduction in solution time across categories.</li>
-            <li>Toolkit adopted by peers for practice and reviews.</li>
-          </ul>
-          <p><a class="link" href="https://github.com/youruser/cp-toolkit">Code</a> ·
-             <a class="link" href="assets/cp-notes.pdf">Notes</a></p>
-        </div>
-        <figure>
-          <img src="assets/cp-matrix.png" alt="Matrix showing solved counts by problem category." />
-          <figcaption>Category matrix and solved counts.</figcaption>
-        </figure>
-      </div>
-    </article>
-  </section>
-
-  <section id="skills">
-    <h2>Skills with proof</h2>
-    <div class="skills">
-      <div class="chip"><span>Software Architecture</span><a href="assets/rag-architecture.pdf">Blueprint</a></div>
-      <div class="chip"><span>Machine Learning</span><a href="https://github.com/youruser/rag-platform">Models</a></div>
-      <div class="chip"><span>Systems Design</span><a href="assets/iot-architecture.pdf">Trade‑offs</a></div>
-      <div class="chip"><span>Python / C++</span><a href="https://github.com/youruser/cp-toolkit">CP Toolkit</a></div>
     </div>
-  </section>
 
-  <section id="now">
-    <h2>Now</h2>
-    <div class="now">
-      Exploring vector search and retrieval reliability, improving grounded evaluation, and optimizing cost at scale; open to research and industry collaborations.
-    </div>
-  </section>
-
-  <section id="contact">
-    <h2>Contact</h2>
-    <p>Email: <a class="link" href="mailto:you@example.com">you@example.com</a> ·
-       <a class="link" href="https://github.com/youruser">GitHub</a> ·
-       <a class="link" href="https://www.linkedin.com/in/your-profile">LinkedIn</a></p>
-  </section>
-</main>
+    <form class="form" id="contactForm">
+      <div class="fg">
+        <label for="name">Name</label>
+        <input type="text" id="name" required placeholder="Your name">
+      </div>
+      <div class="fg">
+        <label for="email">Email</label>
+        <input type="email" id="email" required placeholder="you@example.com">
+      </div>
+      <div class="fg">
+        <label for="subject">Subject</label>
+        <input type="text" id="subject" required placeholder="Collaboration / Research / Opportunity">
+      </div>
+      <div class="fg">
+        <label for="message">Message</label>
+        <textarea id="message" required placeholder="Tell me about your project..."></textarea>
+      </div>
+      <button type="submit" class="submit">Send Message</button>
+    </form>
+  </div>
+</section>
 
 <footer>
-  <small>© <span id="year"></span> Samir Guenchi</small>
+  <p>© 2025 Samir Guenchi · Built from scratch, no templates · <a href="https://github.com/Samir-Guenchi">View source</a></p>
 </footer>
 
 <script>
-  document.getElementById('year').textContent = new Date().getFullYear();
+// Form mailto handler
+document.getElementById('contactForm').addEventListener('submit',e=>{
+  e.preventDefault();
+  const f=e.target,d={name:f.name.value,email:f.email.value,subject:f.subject.value,message:f.message.value};
+  window.location.href=`mailto:samir.guenchi@ensia.edu.dz?subject=${encodeURIComponent(d.subject)}&body=${encodeURIComponent(`Name: ${d.name}\nEmail: ${d.email}\n\nMessage:\n${d.message}`)}`;
+  f.reset();alert('Your email client will open shortly!');
+});
 
-  // Smooth scroll with hash update
-  document.querySelectorAll('a[href^="#"]').forEach(a=>{
-    a.addEventListener('click', ev=>{
-      const id = a.getAttribute('href');
-      const el = document.querySelector(id);
-      if(el){ ev.preventDefault(); el.scrollIntoView({behavior:'smooth', block:'start'}); history.pushState(null,"",id); }
-    });
-  });
-
-  // Tiny scroll spy for subtle nav feedback (desktop only when nav visible)
-  const sections=[...document.querySelectorAll('main section')];
-  const links={}; document.querySelectorAll('nav a[href^="#"]').forEach(a=>links[a.getAttribute('href')]=a);
-  const io=new IntersectionObserver(es=>{
-    es.forEach(e=>{ if(e.isIntersecting){ Object.values(links).forEach(l=>l.classList.remove('active'));
-      const l=links['#'+e.target.id]; if(l) l.classList.add('active'); }});
-  },{rootMargin:"-40% 0px -55% 0px",threshold:0.01});
-  sections.forEach(s=>io.observe(s));
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{
+  e.preventDefault();const t=document.querySelector(a.getAttribute('href'));
+  if(t)t.scrollIntoView({behavior:'smooth',block:'start'});
+}));
 </script>
 
 </body>

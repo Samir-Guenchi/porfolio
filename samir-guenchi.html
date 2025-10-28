@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Samir Guenchi — AI/ML Engineer & Arabic NLP Specialist</title>
-<meta name="description" content="AI/ML Engineer specializing in Arabic NLP and RAG systems. Building production ML pipelines with measurable impact. Open for senior research positions.">
+<title>Samir Guenchi — AI Systems & Arabic NLP</title>
+<meta name="description" content="Building intelligent systems for Arabic NLP, RAG pipelines, and competitive programming. Research-driven portfolio by Samir Guenchi.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -36,7 +36,7 @@ header{
 }
 .hdr{
   max-width:1200px;margin:0 auto;padding:18px 20px;
-  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;
+  display:flex;justify-content:space-between;align-items:center;
 }
 .logo{
   font:700 24px/1 'Caveat',cursive;color:var(--ink);text-decoration:none;
@@ -46,9 +46,9 @@ header{
   content:'';position:absolute;bottom:-4px;left:0;right:0;height:3px;
   background:repeating-linear-gradient(90deg,var(--accent),var(--accent) 8px,transparent 8px,transparent 12px);
 }
-nav{display:flex;gap:20px;align-items:center;flex-wrap:wrap}
+nav{display:flex;gap:28px;align-items:center}
 nav a{
-  color:var(--pencil);text-decoration:none;font-weight:500;font-size:15px;
+  color:var(--pencil);text-decoration:none;font-weight:500;
   position:relative;transition:color var(--transition);
 }
 nav a:hover{color:var(--accent)}
@@ -59,12 +59,12 @@ nav a:before{
 nav a:hover:before{width:100%}
 .cv-btn{
   padding:8px 16px;background:var(--accent);color:var(--paper);
-  border-radius:var(--radius);font-weight:600;font-size:15px;
+  border-radius:var(--radius);font-weight:600;
   box-shadow:2px 2px 0 var(--ink);transition:transform var(--transition),box-shadow var(--transition);
 }
 .cv-btn:hover{transform:translate(-1px,-1px);box-shadow:3px 3px 0 var(--ink)}
 
-/* Terminal */
+/* Terminal Toggle Button */
 .term-toggle{
   position:fixed;bottom:24px;right:24px;z-index:1000;
   width:56px;height:56px;border-radius:50%;
@@ -77,6 +77,7 @@ nav a:hover:before{width:100%}
 }
 .term-toggle:hover{transform:scale(1.1) rotate(5deg)}
 
+/* Terminal Window */
 .terminal{
   position:fixed;bottom:90px;right:24px;z-index:999;
   width:min(520px,calc(100vw - 48px));height:420px;
@@ -134,7 +135,7 @@ nav a:hover:before{width:100%}
   position:relative;
 }
 .sketch:before{
-  content:'[ targeting: AI/ML Engineering • Senior Research ]';
+  content:'[ lab notes — 2025.10.28 ]';
   position:absolute;top:-14px;left:20px;background:var(--paper);
   padding:0 8px;font:12px 'JetBrains Mono',monospace;color:var(--pencil);
 }
@@ -144,19 +145,14 @@ h1{
 }
 .hi{color:var(--accent)}
 .role{
-  font:600 18px/1.4 Inter;color:var(--pencil);margin-bottom:16px;
-}
-.value{
-  background:var(--highlight);padding:12px 16px;border-radius:var(--radius);
-  border:2px solid var(--ink);margin-bottom:24px;font-weight:600;
-  box-shadow:2px 2px 0 rgba(13,27,42,.15);
+  font:600 18px/1.4 Inter;color:var(--pencil);margin-bottom:24px;
 }
 .bio{margin-bottom:24px;color:var(--pencil)}
 .tags{display:flex;flex-wrap:wrap;gap:8px}
 .tag{
-  padding:6px 12px;background:rgba(61,90,128,.08);color:var(--link);
+  padding:6px 12px;background:var(--highlight);color:var(--ink);
   border-radius:var(--radius);font:500 14px 'JetBrains Mono',monospace;
-  border:1px solid rgba(13,27,42,.08);
+  border:1px solid rgba(13,27,42,.12);
 }
 
 .side-sketch{
@@ -166,7 +162,10 @@ h1{
   position:relative;
 }
 .side-sketch:before{
-  content:'📊';position:absolute;top:8px;right:12px;font-size:24px;
+  content:'?';position:absolute;top:8px;right:12px;
+  width:28px;height:28px;border-radius:50%;border:2px solid var(--accent);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:700;color:var(--accent);
 }
 .side-sketch h3{font-size:20px;margin-bottom:12px;color:var(--ink)}
 .side-sketch ul{list-style:none;margin-top:12px}
@@ -176,10 +175,9 @@ h1{
 .side-sketch li:before{
   content:'→';position:absolute;left:0;color:var(--accent);font-weight:700;
 }
-.metric{font-weight:700;color:var(--accent)}
 
-/* Case Studies */
-.cases{max-width:1200px;margin:0 auto;padding:60px 20px}
+/* Projects */
+.projects{max-width:1200px;margin:0 auto;padding:60px 20px}
 .sec-title{
   font:700 36px/1.2 'Caveat',cursive;margin-bottom:8px;
   position:relative;display:inline-block;
@@ -188,79 +186,10 @@ h1{
   content:'';position:absolute;bottom:-6px;left:0;right:0;height:4px;
   background:repeating-linear-gradient(90deg,var(--accent),var(--accent) 12px,transparent 12px,transparent 18px);
 }
-.sec-sub{color:var(--pencil);margin-bottom:40px;max-width:700px}
+.sec-sub{color:var(--pencil);margin-bottom:40px}
 
-.case{
-  background:white;padding:32px;border-radius:8px;
-  border:2px solid var(--ink);box-shadow:var(--shadow);
-  margin-bottom:48px;
-}
-.case-header{
-  display:flex;justify-content:space-between;align-items:start;
-  margin-bottom:24px;flex-wrap:wrap;gap:16px;
-}
-.case h3{font:700 28px/1.2 Inter;color:var(--ink)}
-.case-role{
-  padding:6px 14px;background:var(--accent);color:var(--paper);
-  border-radius:999px;font:600 13px 'JetBrains Mono',monospace;
-  white-space:nowrap;
-}
-.case-grid{
-  display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-bottom:24px;
-}
-.case h4{font:600 18px/1.3 Inter;margin-bottom:10px;color:var(--pencil)}
-.case p,.case li{color:var(--pencil);font-size:15px}
-.case ul{margin:8px 0 0 20px}
-.case li{margin-bottom:6px}
-.metrics{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;
-  margin:24px 0;
-}
-.metric-card{
-  background:var(--highlight);padding:16px;border-radius:var(--radius);
-  border:2px solid rgba(13,27,42,.1);text-align:center;
-}
-.metric-num{font:700 32px/1 'Caveat',cursive;color:var(--ink);display:block;margin-bottom:4px}
-.metric-label{font:600 13px 'JetBrains Mono',monospace;color:var(--pencil)}
-.tech{display:flex;flex-wrap:wrap;gap:6px;margin:16px 0}
-.tech span{
-  padding:4px 10px;background:rgba(61,90,128,.08);color:var(--link);
-  border-radius:999px;font:500 13px 'JetBrains Mono',monospace;
-}
-.case-links{display:flex;gap:12px;flex-wrap:wrap}
-.case-links a{
-  padding:10px 18px;background:var(--accent);color:var(--paper);
-  text-decoration:none;border-radius:var(--radius);font-weight:600;
-  box-shadow:2px 2px 0 var(--ink);transition:transform var(--transition);
-}
-.case-links a:hover{transform:translate(-1px,-1px);box-shadow:3px 3px 0 var(--ink)}
-.secondary{background:transparent!important;color:var(--link)!important;border:2px solid var(--pencil)}
-
-.visual{
-  margin:24px 0;padding:16px;background:rgba(61,90,128,.03);
-  border-radius:8px;border:2px dashed var(--pencil);
-}
-.visual img{
-  width:100%;border-radius:6px;box-shadow:0 4px 12px rgba(13,27,42,.15);
-}
-.visual-caption{
-  font:14px 'JetBrains Mono',monospace;color:var(--pencil);
-  margin-top:10px;text-align:center;
-}
-
-.quote{
-  background:linear-gradient(135deg,rgba(129,178,154,.15),rgba(129,178,154,.05));
-  border-left:4px solid var(--success);padding:20px;margin:24px 0;
-  border-radius:var(--radius);font-style:italic;
-}
-.quote-text{color:var(--pencil);margin-bottom:8px}
-.quote-author{font:600 14px Inter;color:var(--ink)}
-
-/* Projects Grid */
-.projects{background:rgba(129,178,154,.03);padding:60px 20px}
 .grid{
-  max-width:1200px;margin:0 auto;
-  display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:28px;
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:32px;
 }
 .card{
   background:white;padding:24px;border-radius:8px;
@@ -273,16 +202,21 @@ h1{
   background:var(--highlight);border:1px solid var(--ink);
   border-radius:var(--radius);font:600 12px 'JetBrains Mono',monospace;
 }
-.card h3{font:600 20px/1.3 Inter;margin-bottom:12px;color:var(--ink)}
-.card p{color:var(--pencil);margin-bottom:16px;font-size:14px}
+.card h3{font:600 22px/1.3 Inter;margin-bottom:12px;color:var(--ink)}
+.card p{color:var(--pencil);margin-bottom:16px;font-size:15px}
+.tech{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px}
+.tech span{
+  padding:4px 10px;background:rgba(61,90,128,.08);color:var(--link);
+  border-radius:999px;font:500 13px 'JetBrains Mono',monospace;
+}
 .card a{
   display:inline-flex;align-items:center;gap:6px;color:var(--accent);
-  text-decoration:none;font-weight:600;font-size:14px;
+  text-decoration:none;font-weight:600;font-size:15px;
 }
 .card a:hover{text-decoration:underline}
 
 /* Experience */
-.exp{padding:60px 20px}
+.exp{background:rgba(129,178,154,.05);padding:60px 20px}
 .timeline{max-width:900px;margin:0 auto}
 .tab{
   background:white;padding:24px 24px 24px 40px;margin-bottom:24px;
@@ -313,7 +247,7 @@ h1{
 }
 .note h3{font:700 24px/1.3 'Caveat',cursive;margin-bottom:12px}
 .note a{color:var(--ink);text-decoration:underline;font-weight:600}
-.socials{display:flex;gap:12px;margin-top:16px;flex-wrap:wrap}
+.socials{display:flex;gap:12px;margin-top:16px}
 .social{
   width:44px;height:44px;background:white;border-radius:50%;
   display:flex;align-items:center;justify-content:center;
@@ -348,16 +282,14 @@ footer a{color:var(--highlight);text-decoration:none}
 @media (max-width:960px){
   .hero{grid-template-columns:1fr;gap:32px}
   .contact-grid{grid-template-columns:1fr}
-  .case-grid{grid-template-columns:1fr}
   .grid{grid-template-columns:1fr}
-  nav{gap:12px;font-size:14px}
+  nav{display:none}
   .term-toggle{width:48px;height:48px;bottom:16px;right:16px}
   .terminal{bottom:76px;right:16px;width:calc(100vw - 32px);height:360px}
 }
 @media (max-width:640px){
   html{font-size:15px}
   h1{font-size:32px}
-  .hdr{flex-direction:column;align-items:flex-start}
 }
 </style>
 </head>
@@ -367,10 +299,10 @@ footer a{color:var(--highlight);text-decoration:none}
   <div class="hdr">
     <a class="logo" href="#top">Samir Guenchi</a>
     <nav>
-      <a href="#cases">Case Studies</a>
       <a href="#projects">Projects</a>
       <a href="#experience">Experience</a>
       <a href="#contact">Contact</a>
+      <!-- Replace FILE_ID -->
       <a class="cv-btn" href="https://drive.google.com/uc?export=download&id=1xunML3vUxfK7LtsTeXv7OavHPwEGEmL9" download>Download CV</a>
     </nav>
   </div>
@@ -378,262 +310,72 @@ footer a{color:var(--highlight);text-decoration:none}
 
 <section class="hero" id="top">
   <div class="sketch">
-    <h1><span class="hi">Samir Guenchi</span> — AI/ML Engineer specializing in Arabic NLP</h1>
-    <p class="role">Lead ML Engineer • RAG Systems Architect • Competitive Programming Coach</p>
-    <div class="value">
-      💡 I build production ML systems that process 100K+ Arabic documents with 40% faster inference and 95%+ accuracy.
-    </div>
+    <h1><span class="hi">Hey, I'm Samir</span> — building intelligent systems for Arabic NLP</h1>
+    <p class="role">AI/ML Engineer • Competitive Programmer • RAG Systems Specialist</p>
     <p class="bio">
-      CS student at ENSIA conducting research in Arabic Natural Language Processing and building retrieval-augmented generation (RAG) pipelines for government and enterprise. 
-      Proven track record training 20+ national Olympiad competitors and deploying ML systems used by thousands.
+      CS student at ENSIA researching Arabic Natural Language Processing and building retrieval-augmented generation (RAG) pipelines. 
+      Coach for Algeria's Olympiad in Informatics, training the next generation of problem solvers.
     </p>
     <div class="tags">
       <span class="tag">Python • C++</span>
       <span class="tag">NLP • RAG</span>
-      <span class="tag">TensorFlow • PyTorch</span>
+      <span class="tag">TensorFlow</span>
       <span class="tag">LangChain</span>
       <span class="tag">Arabic ML</span>
     </div>
   </div>
 
   <div class="side-sketch">
-    <h3>Impact at a Glance</h3>
+    <h3>Current Focus</h3>
+    <p>Q4 2025 research priorities:</p>
     <ul>
-      <li><span class="metric">100K+</span> documents processed in RAG pipeline</li>
-      <li><span class="metric">40%</span> reduction in inference time</li>
-      <li><span class="metric">95%+</span> ML model accuracy</li>
-      <li><span class="metric">20+</span> Olympiad students trained</li>
-      <li><span class="metric">6</span> production systems deployed</li>
+      <li>Arabic semantic search at scale</li>
+      <li>Grounded RAG evaluation metrics</li>
+      <li>Olympiad prep (IOI 2026)</li>
+      <li>Open to research internships</li>
     </ul>
-    <p style="margin-top:16px;font-size:14px">Open for <strong>senior AI/ML research positions</strong> starting Q1 2026</p>
   </div>
 </section>
 
-<section class="cases" id="cases">
-  <h2 class="sec-title">Featured Case Studies</h2>
-  <p class="sec-sub">Deep dives into 3 major projects showing problem → process → impact with measurable outcomes and real user feedback.</p>
-
-  <!-- CASE STUDY 1 -->
-  <article class="case">
-    <div class="case-header">
-      <h3>Ministry Regulation Q&A System</h3>
-      <span class="case-role">Lead ML Engineer</span>
-    </div>
-
-    <div class="case-grid">
-      <div>
-        <h4>🎯 Problem</h4>
-        <p>Citizens struggled to navigate 10,000+ pages of Arabic government regulations, leading to 500+ daily support calls and compliance confusion.</p>
-      </div>
-      <div>
-        <h4>👥 Users & Stakeholders</h4>
-        <p>3,000+ daily users (citizens, lawyers, civil servants). Ministry of Justice stakeholders demanding 95%+ accuracy.</p>
-      </div>
-    </div>
-
-    <h4>🔧 Technical Approach</h4>
-    <ul>
-      <li><strong>Semantic chunking:</strong> Built custom Arabic text splitter respecting linguistic boundaries (not just token limits)</li>
-      <li><strong>Vector retrieval:</strong> Fine-tuned AraBERT embeddings for regulation-specific semantic search</li>
-      <li><strong>Grounded generation:</strong> LangChain pipeline with citation tracking to prevent hallucinations</li>
-      <li><strong>Evaluation harness:</strong> AB testing framework with human-in-loop validation for edge cases</li>
-    </ul>
-
-    <div class="tech">
-      <span>Python</span><span>LangChain</span><span>AraBERT</span><span>FAISS</span><span>FastAPI</span>
-    </div>
-
-    <div class="metrics">
-      <div class="metric-card">
-        <span class="metric-num">42%</span>
-        <span class="metric-label">↓ Support Calls</span>
-      </div>
-      <div class="metric-card">
-        <span class="metric-num">97%</span>
-        <span class="metric-label">Answer Accuracy</span>
-      </div>
-      <div class="metric-card">
-        <span class="metric-num">380ms</span>
-        <span class="metric-label">p95 Latency</span>
-      </div>
-      <div class="metric-card">
-        <span class="metric-num">3K+</span>
-        <span class="metric-label">Daily Users</span>
-      </div>
-    </div>
-
-    <div class="visual">
-      <img src="https://via.placeholder.com/800x400/e6e6e6/666?text=RAG+Pipeline+Architecture+Diagram" alt="Architecture showing document pipeline, vector store, and API gateway">
-      <p class="visual-caption">System architecture: ETL → Semantic Index → Retrieval → Generation with citations</p>
-    </div>
-
-    <div class="quote">
-      <p class="quote-text">"This system cut our legal compliance consultation time by half. The Arabic understanding is surprisingly accurate."</p>
-      <p class="quote-author">— Dr. Amina Benali, Ministry Legal Advisor</p>
-    </div>
-
-    <h4>📊 Key Learnings</h4>
-    <ul>
-      <li>Arabic morphology requires custom tokenization—off-the-shelf models struggled with dialectal variations</li>
-      <li>Grounding citations increased user trust by 34% (measured via satisfaction surveys)</li>
-      <li>Real-time monitoring caught 12 edge cases in first month that improved accuracy from 94% → 97%</li>
-    </ul>
-
-    <div class="case-links">
-      <a href="https://github.com/Samir-Guenchi/Ministry-Regulation">View Code on GitHub</a>
-      <a href="#" class="secondary">Read Full Case Study</a>
-    </div>
-  </article>
-
-  <!-- CASE STUDY 2 -->
-  <article class="case">
-    <div class="case-header">
-      <h3>BUPA Liver Disorder Prediction Pipeline</h3>
-      <span class="case-role">Sole ML Engineer</span>
-    </div>
-
-    <div class="case-grid">
-      <div>
-        <h4>🎯 Problem</h4>
-        <p>Clinical research needed automated liver disorder screening with 90%+ recall to reduce false negatives in at-risk populations.</p>
-      </div>
-      <div>
-        <h4>👥 Impact</h4>
-        <p>Used by research team analyzing 5,000+ patient records. Model deployed in staging environment for clinical validation.</p>
-      </div>
-    </div>
-
-    <h4>🔧 Technical Approach</h4>
-    <ul>
-      <li><strong>Advanced feature engineering:</strong> Domain-informed polynomial features and interaction terms</li>
-      <li><strong>Ensemble methods:</strong> Stacking classifier combining XGBoost, Random Forest, and Logistic Regression</li>
-      <li><strong>Hyperparameter optimization:</strong> Bayesian optimization with cross-validation for robust generalization</li>
-      <li><strong>Interpretability:</strong> SHAP values for clinical explainability and bias detection</li>
-    </ul>
-
-    <div class="tech">
-      <span>Python</span><span>Scikit-learn</span><span>XGBoost</span><span>SHAP</span><span>Pandas</span>
-    </div>
-
-    <div class="metrics">
-      <div class="metric-card">
-        <span class="metric-num">96.3%</span>
-        <span class="metric-label">Accuracy</span>
-      </div>
-      <div class="metric-card">
-        <span class="metric-num">94.1%</span>
-        <span class="metric-label">Recall</span>
-      </div>
-      <div class="metric-card">
-        <span class="metric-num">0.89</span>
-        <span class="metric-label">F1 Score</span>
-      </div>
-      <div class="metric-card">
-        <span class="metric-num">5K+</span>
-        <span class="metric-label">Records Analyzed</span>
-      </div>
-    </div>
-
-    <div class="visual">
-      <img src="https://via.placeholder.com/800x400/e6e6e6/666?text=SHAP+Feature+Importance+%26+Confusion+Matrix" alt="SHAP feature importance and model confusion matrix">
-      <p class="visual-caption">SHAP analysis revealing top clinical predictors and model performance breakdown</p>
-    </div>
-
-    <h4>📊 Key Learnings</h4>
-    <ul>
-      <li>Ensemble stacking outperformed single models by 4.2% accuracy—critical for medical applications</li>
-      <li>SHAP interpretability helped clinicians trust model predictions and identify high-risk features</li>
-      <li>Stratified k-fold validation prevented overfitting on imbalanced clinical datasets</li>
-    </ul>
-
-    <div class="case-links">
-      <a href="https://github.com/Samir-Guenchi/BUPA-Liver-Disorder-Analysis">View Code on GitHub</a>
-      <a href="#" class="secondary">Technical Deep Dive</a>
-    </div>
-  </article>
-
-  <!-- CASE STUDY 3 -->
-  <article class="case">
-    <div class="case-header">
-      <h3>QR Code Security Mobile Analyzer</h3>
-      <span class="case-role">Full-Stack Mobile Developer</span>
-    </div>
-
-    <div class="case-grid">
-      <div>
-        <h4>🎯 Problem</h4>
-        <p>Growing QR phishing attacks with no accessible real-time mobile security solution for non-technical users.</p>
-      </div>
-      <div>
-        <h4>👥 Users</h4>
-        <p>500+ beta testers on Android. Target: everyday smartphone users scanning restaurant/payment QR codes.</p>
-      </div>
-    </div>
-
-    <h4>🔧 Technical Approach</h4>
-    <ul>
-      <li><strong>On-device ML:</strong> TensorFlow Lite model for instant classification without internet dependency</li>
-      <li><strong>Heuristic security layer:</strong> URL pattern matching, domain reputation checks, SSL validation</li>
-      <li><strong>UX optimization:</strong> Scan → Analyze → Result in under 2 seconds with color-coded risk levels</li>
-      <li><strong>Privacy-first:</strong> All processing happens locally—zero data sent to servers</li>
-    </ul>
-
-    <div class="tech">
-      <span>Flutter</span><span>Dart</span><span>TFLite</span><span>Computer Vision</span>
-    </div>
-
-    <div class="metrics">
-      <div class="metric-card">
-        <span class="metric-num">92%</span>
-        <span class="metric-label">Threat Detection</span>
-      </div>
-      <div class="metric-card">
-        <span class="metric-num">1.8s</span>
-        <span class="metric-label">Avg Scan Time</span>
-      </div>
-      <div class="metric-card">
-        <span class="metric-num">500+</span>
-        <span class="metric-label">Beta Users</span>
-      </div>
-      <div class="metric-card">
-        <span class="metric-num">4.6/5</span>
-        <span class="metric-label">User Rating</span>
-      </div>
-    </div>
-
-    <div class="visual">
-      <img src="https://via.placeholder.com/400x600/e6e6e6/666?text=Mobile+App+Screenshots" alt="Three mobile screens showing scan, analysis, and result states">
-      <p class="visual-caption">Mobile UI flow: Camera scan → Real-time analysis → Risk assessment with recommendations</p>
-    </div>
-
-    <div class="quote">
-      <p class="quote-text">"Finally a QR scanner that tells me if it's safe before I click! Saved me from a phishing link at a fake restaurant menu."</p>
-      <p class="quote-author">— Sarah K., Beta Tester</p>
-    </div>
-
-    <h4>📊 Key Learnings</h4>
-    <ul>
-      <li>Model compression from 45MB → 8MB enabled smooth on-device inference on mid-range phones</li>
-      <li>Color-coded UX (red/yellow/green) increased user trust—users wanted instant visual feedback</li>
-      <li>Privacy-first approach became top selling point in user interviews (cited by 78% of testers)</li>
-    </ul>
-
-    <div class="case-links">
-      <a href="https://github.com/Samir-Guenchi/Qr_Analyzer">View Code on GitHub</a>
-      <a href="#" class="secondary">Mobile Demo Video</a>
-    </div>
-  </article>
-</section>
-
 <section class="projects" id="projects">
-  <h2 class="sec-title">Additional Projects</h2>
-  <p class="sec-sub">More production systems, algorithms, and experiments—each with working code and documentation.</p>
+  <h2 class="sec-title">Selected Projects</h2>
+  <p class="sec-sub">Real systems solving real problems — with code and proofs. Try typing <code>projects</code> in the terminal!</p>
 
   <div class="grid">
     <article class="card">
+      <span class="card-label">Arabic NLP</span>
+      <h3>Ministry Regulation Q&A</h3>
+      <p>RAG system for accurate Arabic question-answering on government regulations. Built semantic chunking, vector retrieval, and grounded generation pipeline.</p>
+      <div class="tech">
+        <span>Python</span><span>LangChain</span><span>Arabic NLP</span>
+      </div>
+      <a href="https://github.com/Samir-Guenchi/Ministry-Regulation">View on GitHub →</a>
+    </article>
+
+    <article class="card">
+      <span class="card-label">ML Pipeline</span>
+      <h3>BUPA Liver Disorder Analysis</h3>
+      <p>End-to-end ML pipeline with advanced feature engineering, model tuning, and ensemble methods. Achieved 95%+ accuracy with comprehensive evaluation.</p>
+      <div class="tech">
+        <span>Python</span><span>Scikit-learn</span><span>Pandas</span>
+      </div>
+      <a href="https://github.com/Samir-Guenchi/BUPA-Liver-Disorder-Analysis">View on GitHub →</a>
+    </article>
+
+    <article class="card">
+      <span class="card-label">Mobile ML</span>
+      <h3>QR Security Analyzer</h3>
+      <p>Flutter app with on-device ML to classify QR codes as safe or malicious. Uses heuristic security functions and TFLite inference.</p>
+      <div class="tech">
+        <span>Flutter</span><span>Dart</span><span>TFLite</span>
+      </div>
+      <a href="https://github.com/Samir-Guenchi/Qr_Analyzer">View on GitHub →</a>
+    </article>
+
+    <article class="card">
       <span class="card-label">Algorithms</span>
       <h3>AI Search Visualizer</h3>
-      <p>Interactive visualization of A*, BFS, DFS, and heuristic search with real-time metrics. Used by 200+ students in algorithm courses.</p>
+      <p>Interactive visualization of A*, BFS, DFS, and heuristic search. Real-time path rendering and performance metrics for teaching algorithms.</p>
       <div class="tech">
         <span>Python</span><span>Pygame</span><span>Algorithms</span>
       </div>
@@ -642,8 +384,8 @@ footer a{color:var(--highlight);text-decoration:none}
 
     <article class="card">
       <span class="card-label">Data Science</span>
-      <h3>Bank Marketing Predictive Model</h3>
-      <p>End-to-end pipeline from EDA to deployment-ready model. Achieved 89% accuracy predicting campaign success.</p>
+      <h3>Bank Marketing Analysis</h3>
+      <p>Predictive modeling for marketing campaign outcomes. Full pipeline from EDA to deployment-ready model with evaluation dashboard.</p>
       <div class="tech">
         <span>Python</span><span>Pandas</span><span>ML</span>
       </div>
@@ -652,8 +394,8 @@ footer a{color:var(--highlight);text-decoration:none}
 
     <article class="card">
       <span class="card-label">Blockchain</span>
-      <h3>Smart Contract Experiments</h3>
-      <p>Consensus mechanisms, decentralized apps, and cryptographic protocols exploring Web3 primitives.</p>
+      <h3>Blockchain Experiments</h3>
+      <p>Smart contracts, consensus mechanisms, and decentralized apps exploring Web3 primitives and cryptographic protocols.</p>
       <div class="tech">
         <span>Solidity</span><span>Web3.js</span><span>Crypto</span>
       </div>
@@ -668,51 +410,50 @@ footer a{color:var(--highlight);text-decoration:none}
     <p class="sec-sub">Building, teaching, and researching at the intersection of AI and education.</p>
 
     <div class="tab">
-      <h3>🏆 Lead Coach — Algerian Olympiad in Informatics</h3>
-      <div class="meta"><span>2023–Present</span><span>National Team</span><span>Remote + Algiers</span></div>
-      <p><strong>Training 20+ students</strong> in competitive programming, algorithms, and problem-solving for IOI and regional contests.</p>
+      <h3>🏆 Coach — Algerian Olympiad in Informatics</h3>
+      <div class="meta"><span>2023–Present</span><span>National Team</span></div>
+      <p>Training 20+ students in competitive programming, algorithms, and problem-solving for IOI and regional contests.</p>
       <ul>
-        <li><strong>Curriculum design:</strong> Created 100+ practice problems across graph theory, DP, and advanced data structures</li>
-        <li><strong>Competition prep:</strong> Prepared 5 students who achieved top-10 national rankings in 2024</li>
-        <li><strong>Mentorship:</strong> 1-on-1 coaching sessions with measurable improvement tracking</li>
+        <li>Graph theory, dynamic programming, and advanced data structures</li>
+        <li>Prepared students for top rankings in national competitions</li>
+        <li>Developed training materials and curated practice problem sets</li>
       </ul>
     </div>
 
     <div class="tab">
-      <h3>🤖 ML Research Member — ENSIA AI Lab</h3>
-      <div class="meta"><span>2022–Present</span><span>Research</span><span>Algiers</span></div>
-      <p>Conducting <strong>Arabic NLP research</strong> and building production ML systems for government and enterprise.</p>
+      <h3>🤖 Research Member — ENSIA-AI Lab</h3>
+      <div class="meta"><span>2022–Present</span><span>Research</span></div>
+      <p>Conducting research in Arabic NLP, retrieval-augmented generation, and ML applications for low-resource languages.</p>
       <ul>
-        <li><strong>Research:</strong> Published findings on Arabic semantic search optimization techniques</li>
-        <li><strong>Systems:</strong> Deployed 3 production RAG pipelines processing 100K+ documents</li>
-        <li><strong>Collaboration:</strong> Co-authored 2 technical papers on low-resource NLP</li>
+        <li>Arabic text processing and semantic search</li>
+        <li>RAG systems evaluation and grounding metrics</li>
+        <li>Collaborating on AI research papers and open-source contributions</li>
       </ul>
     </div>
 
     <div class="tab">
-      <h3>🎓 CS Student (AI/ML Track) — ENSIA</h3>
-      <div class="meta"><span>2021–Present</span><span>5-Year Engineering Program</span><span>Algiers</span></div>
-      <p>Specializing in <strong>AI and Machine Learning</strong> with focus on NLP and intelligent systems.</p>
+      <h3>🎓 Computer Science Student — ENSIA</h3>
+      <div class="meta"><span>2021–Present</span><span>Algiers, Algeria</span></div>
+      <p>Specializing in AI and Machine Learning with focus on natural language processing and intelligent systems.</p>
       <ul>
-        <li><strong>GPA:</strong> 3.8/4.0 with Dean's List honors (top 10%)</li>
-        <li><strong>Leadership:</strong> IT Manager for EBEC (European Business Engineering Competition) team</li>
-        <li><strong>Hackathons:</strong> Winner of Algeria Data Cup 2024 (data science competition)</li>
+        <li>Academic excellence in AI/ML coursework</li>
+        <li>Active in student organizations and tech clubs (EBEC)</li>
+        <li>Leading multiple technical and research projects</li>
       </ul>
     </div>
   </div>
 </section>
 
 <section class="contact" id="contact">
-  <h2 class="sec-title">Let's Build Something Together</h2>
-  <p class="sec-sub">Open for senior AI/ML research positions, technical collaborations, and interesting problems. Or just type <code>contact</code> in the terminal!</p>
+  <h2 class="sec-title">Get in Touch</h2>
+  <p class="sec-sub">Open for research collaborations, internships, and technical discussions. Or just type <code>contact</code> in the terminal!</p>
 
   <div class="contact-grid">
     <div class="note">
-      <h3>Get in Touch</h3>
+      <h3>Let's connect!</h3>
       <p><strong>Email:</strong> <a href="mailto:samir.guenchi@ensia.edu.dz">samir.guenchi@ensia.edu.dz</a></p>
-      <p><strong>Location:</strong> Tlemcen, Algeria 🇩🇿</p>
-      <p><strong>Status:</strong> Graduating May 2026 • Open for Q1 2026 start</p>
-      <p><strong>Interests:</strong> Arabic NLP, RAG systems, ML research, competitive programming</p>
+      <p><strong>Location:</strong> Maghnia, Tlemcen, Algeria 🇩🇿</p>
+      <p><strong>Status:</strong> Open for internships & research positions</p>
       <div class="socials">
         <a href="https://www.linkedin.com/in/guenchi-samir" class="social" title="LinkedIn">in</a>
         <a href="https://github.com/Samir-Guenchi" class="social" title="GitHub">gh</a>
@@ -732,11 +473,11 @@ footer a{color:var(--highlight);text-decoration:none}
       </div>
       <div class="fg">
         <label for="subject">Subject</label>
-        <input type="text" id="subject" required placeholder="Research Collaboration / Senior Position / Consulting">
+        <input type="text" id="subject" required placeholder="Collaboration / Research / Opportunity">
       </div>
       <div class="fg">
         <label for="message">Message</label>
-        <textarea id="message" required placeholder="Tell me about your project or opportunity..."></textarea>
+        <textarea id="message" required placeholder="Tell me about your project..."></textarea>
       </div>
       <button type="submit" class="submit">Send Message</button>
     </form>
@@ -744,11 +485,11 @@ footer a{color:var(--highlight);text-decoration:none}
 </section>
 
 <footer>
-  <p>© 2025 Samir Guenchi · Handcrafted portfolio, zero templates · Optimized for performance & accessibility · <a href="https://github.com/Samir-Guenchi">View source code</a></p>
+  <p>© 2025 Samir Guenchi · Built from scratch, no templates · <a href="https://github.com/Samir-Guenchi">View source</a></p>
 </footer>
 
 <!-- Terminal -->
-<button class="term-toggle" id="termToggle" title="Open Terminal (try: help, cv, projects)">$_</button>
+<button class="term-toggle" id="termToggle" title="Open Terminal">$_</button>
 
 <div class="terminal" id="terminal">
   <div class="term-header">
@@ -766,80 +507,74 @@ footer a{color:var(--highlight);text-decoration:none}
 </div>
 
 <script>
-// Terminal
-const terminal=document.getElementById('terminal'),termToggle=document.getElementById('termToggle'),termClose=document.getElementById('termClose'),termOutput=document.getElementById('termOutput'),termInput=document.getElementById('termInput');
+// Terminal functionality
+const terminal = document.getElementById('terminal');
+const termToggle = document.getElementById('termToggle');
+const termClose = document.getElementById('termClose');
+const termOutput = document.getElementById('termOutput');
+const termInput = document.getElementById('termInput');
 
-const commands={
-  help:()=>`<span class="term-info">Available commands:</span>
+const commands = {
+  help: () => `<span class="term-info">Available commands:</span>
   • <span class="term-cmd">about</span>     - Who is Samir?
   • <span class="term-cmd">cv</span>        - Download CV
   • <span class="term-cmd">projects</span>  - View all projects
   • <span class="term-cmd">skills</span>    - List technical skills
   • <span class="term-cmd">contact</span>   - Get contact info
-  • <span class="term-cmd">metrics</span>   - View impact metrics
-  • <span class="term-cmd">github</span>    - Open GitHub
+  • <span class="term-cmd">github</span>    - Open GitHub profile
   • <span class="term-cmd">linkedin</span>  - Open LinkedIn
   • <span class="term-cmd">whoami</span>    - Easter egg
   • <span class="term-cmd">clear</span>     - Clear terminal
   • <span class="term-cmd">exit</span>      - Close terminal`,
   
-  about:()=>`<span class="term-info">Samir Guenchi — AI/ML Engineer</span>
-  → CS Student @ ENSIA (Algeria) — Graduating May 2026
-  → Specialization: Arabic NLP & RAG Systems
-  → Lead Coach: Algerian Olympiad in Informatics
-  → 100K+ documents processed • 40% faster inference
-  → Open for senior research positions Q1 2026`,
+  about: () => `<span class="term-info">Samir Guenchi</span>
+  → CS Student @ ENSIA (Algeria)
+  → AI/ML Engineer specializing in Arabic NLP
+  → Competitive Programmer & IOI Coach
+  → Building RAG systems & intelligent applications
+  → Open for research internships & collaborations`,
   
-  cv:()=>{
-    window.open('https://drive.google.com/uc?export=download&id=1xunML3vUxfK7LtsTeXv7OavHPwEGEmL9','_blank');
-    return`<span class="term-info">✓ Opening CV download...</span>`;
+  cv: () => {
+    window.open('https://drive.google.com/uc?export=download&id=1xunML3vUxfK7LtsTeXv7OavHPwEGEmL9', '_blank');
+    return `<span class="term-info">✓ Opening CV download...</span>`;
   },
   
-  projects:()=>`<span class="term-info">Featured Projects:</span>
-  1. <span class="term-cmd">Ministry Regulation Q&A</span> - Arabic RAG (97% accuracy, 3K users)
-  2. <span class="term-cmd">BUPA Liver Analysis</span> - ML pipeline (96.3% accuracy)
-  3. <span class="term-cmd">QR Security Analyzer</span> - Mobile ML (500+ users, 4.6/5 rating)
-  4. <span class="term-cmd">AI Search Visualizer</span> - Algorithm education tool
-  5. <span class="term-cmd">Bank Marketing Model</span> - Predictive analytics (89% accuracy)
+  projects: () => `<span class="term-info">Featured Projects:</span>
+  1. <span class="term-cmd">Ministry Regulation Q&A</span> - Arabic RAG system
+  2. <span class="term-cmd">BUPA Liver Analysis</span> - ML pipeline & ensemble methods
+  3. <span class="term-cmd">QR Security Analyzer</span> - Mobile ML with TFLite
+  4. <span class="term-cmd">AI Search Visualizer</span> - Interactive algorithm viz
+  5. <span class="term-cmd">Bank Marketing Analysis</span> - Predictive modeling
   
-  <span class="term-info">→ GitHub: github.com/Samir-Guenchi</span>`,
+  <span class="term-info">→ Visit GitHub for full portfolio: github.com/Samir-Guenchi</span>`,
   
-  skills:()=>`<span class="term-info">Technical Stack:</span>
+  skills: () => `<span class="term-info">Technical Stack:</span>
   Languages: Python, C++, JavaScript, Dart
-  ML/AI: TensorFlow, PyTorch, LangChain, Scikit-learn, XGBoost
-  NLP: Arabic NLP, RAG, Semantic Search, Transformers, SHAP
-  Tools: Git, Docker, Linux, Jupyter, VS Code, FastAPI
-  Mobile: Flutter, TFLite
-  Databases: PostgreSQL, FAISS, Chroma`,
+  ML/AI: TensorFlow, PyTorch, LangChain, Scikit-learn
+  NLP: Arabic NLP, RAG, Semantic Search, Transformers
+  Tools: Git, Docker, Linux, Jupyter, VS Code
+  Mobile: Flutter, Firebase
+  Blockchain: Solidity, Web3.js`,
   
-  metrics:()=>`<span class="term-info">Impact Metrics:</span>
-  📊 100K+ documents processed in RAG pipelines
-  ⚡ 40% reduction in inference time
-  🎯 95%+ ML model accuracy across projects
-  👨‍🏫 20+ Olympiad students trained (5 in national top-10)
-  🚀 6 production systems deployed
-  👥 3,000+ daily active users on Ministry system`,
-  
-  contact:()=>`<span class="term-info">Contact Information:</span>
+  contact: () => `<span class="term-info">Contact Information:</span>
   📧 Email: samir.guenchi@ensia.edu.dz
   💼 LinkedIn: linkedin.com/in/guenchi-samir
   🐙 GitHub: github.com/Samir-Guenchi
   📊 Kaggle: kaggle.com/guenchisamir
   💻 Codeforces: codeforces.com/profile/Guenchi_Samir_ia
-  📍 Location: Tlemcen, Algeria
-  🎓 Status: Open for Q1 2026 positions`,
+  📍 Location: Tlemcen, Algeria`,
   
-  github:()=>{
-    window.open('https://github.com/Samir-Guenchi','_blank');
-    return`<span class="term-info">✓ Opening GitHub...</span>`;
+  github: () => {
+    window.open('https://github.com/Samir-Guenchi', '_blank');
+    return `<span class="term-info">✓ Opening GitHub profile...</span>`;
   },
   
-  linkedin:()=>{
-    window.open('https://www.linkedin.com/in/guenchi-samir','_blank');
-    return`<span class="term-info">✓ Opening LinkedIn...</span>`;
+  linkedin: () => {
+    window.open('https://www.linkedin.com/in/guenchi-samir', '_blank');
+    return `<span class="term-info">✓ Opening LinkedIn profile...</span>`;
   },
   
-  whoami:()=>`<span class="term-info">You are viewing the portfolio of:</span>
+  whoami: () => `<span class="term-info">You are viewing the portfolio of:</span>
   
    ██████╗ ██╗   ██╗███████╗███╗   ██╗ ██████╗██╗  ██╗██╗
   ██╔════╝ ██║   ██║██╔════╝████╗  ██║██╔════╝██║  ██║██║
@@ -850,47 +585,54 @@ const commands={
   
   <span class="term-cmd">Samir Guenchi</span> - AI Engineer & Problem Solver`,
   
-  clear:()=>{termOutput.innerHTML='';return null},
-  exit:()=>{terminal.classList.remove('open');return null}
+  clear: () => {
+    termOutput.innerHTML = '';
+    return null;
+  },
+  
+  exit: () => {
+    terminal.classList.remove('open');
+    return null;
+  }
 };
 
-termToggle.addEventListener('click',()=>{
+termToggle.addEventListener('click', () => {
   terminal.classList.toggle('open');
-  if(terminal.classList.contains('open'))termInput.focus();
+  if (terminal.classList.contains('open')) termInput.focus();
 });
 
-termClose.addEventListener('click',()=>terminal.classList.remove('open'));
+termClose.addEventListener('click', () => terminal.classList.remove('open'));
 
-termInput.addEventListener('keydown',e=>{
-  if(e.key==='Enter'){
-    const cmd=termInput.value.trim().toLowerCase();
-    termInput.value='';
+termInput.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    const cmd = termInput.value.trim().toLowerCase();
+    termInput.value = '';
     
-    const line=document.createElement('div');
-    line.className='term-line';
-    line.innerHTML=`<span class="term-prompt">samir@portfolio:~$</span> <span class="term-cmd">${cmd}</span>`;
+    const line = document.createElement('div');
+    line.className = 'term-line';
+    line.innerHTML = `<span class="term-prompt">samir@portfolio:~$</span> <span class="term-cmd">${cmd}</span>`;
     termOutput.appendChild(line);
     
-    if(commands[cmd]){
-      const result=commands[cmd]();
-      if(result){
-        const output=document.createElement('div');
-        output.className='term-line';
-        output.innerHTML=result;
+    if (commands[cmd]) {
+      const result = commands[cmd]();
+      if (result) {
+        const output = document.createElement('div');
+        output.className = 'term-line';
+        output.innerHTML = result;
         termOutput.appendChild(output);
       }
-    }else if(cmd){
-      const error=document.createElement('div');
-      error.className='term-line';
-      error.innerHTML=`<span class="term-error">Command not found: ${cmd}</span><br><span class="term-info">Type 'help' for available commands</span>`;
+    } else if (cmd) {
+      const error = document.createElement('div');
+      error.className = 'term-line';
+      error.innerHTML = `<span class="term-error">Command not found: ${cmd}</span><br><span class="term-info">Type 'help' for available commands</span>`;
       termOutput.appendChild(error);
     }
     
-    termOutput.scrollTop=termOutput.scrollHeight;
+    termOutput.scrollTop = termOutput.scrollHeight;
   }
 });
 
-// Form
+// Form handler
 document.getElementById('contactForm').addEventListener('submit',e=>{
   e.preventDefault();
   const f=e.target,d={name:f.name.value,email:f.email.value,subject:f.subject.value,message:f.message.value};

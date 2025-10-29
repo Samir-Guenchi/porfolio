@@ -74,8 +74,13 @@ nav a:hover:before{width:100%}
   font:700 20px 'JetBrains Mono',monospace;
   box-shadow:0 8px 24px rgba(0,255,65,.3);
   transition:transform var(--transition);
+  animation:pulse 2s infinite;
 }
-.term-toggle:hover{transform:scale(1.1) rotate(5deg)}
+@keyframes pulse{
+  0%,100%{box-shadow:0 8px 24px rgba(0,255,65,.3)}
+  50%{box-shadow:0 8px 32px rgba(0,255,65,.5)}
+}
+.term-toggle:hover{transform:scale(1.1) rotate(5deg);animation:none}
 
 /* Terminal Window */
 .terminal{
@@ -85,7 +90,11 @@ nav a:hover:before{width:100%}
   border-radius:8px;box-shadow:0 12px 48px rgba(0,0,0,.5);
   display:none;flex-direction:column;
 }
-.terminal.open{display:flex}
+.terminal.open{display:flex;animation:slideUp .3s ease}
+@keyframes slideUp{
+  from{transform:translateY(20px);opacity:0}
+  to{transform:translateY(0);opacity:1}
+}
 
 .term-header{
   background:linear-gradient(180deg,#2a2d35,#1a1d23);
@@ -133,6 +142,11 @@ nav a:hover:before{width:100%}
   background:white;padding:32px;border-radius:8px;
   border:2px dashed var(--pencil);box-shadow:var(--shadow);
   position:relative;
+  animation:fadeInLeft .6s ease;
+}
+@keyframes fadeInLeft{
+  from{transform:translateX(-20px);opacity:0}
+  to{transform:translateX(0);opacity:1}
 }
 .sketch:before{
   content:'[ lab notes — 2025.10.29 ]';
@@ -143,7 +157,13 @@ h1{
   font:700 clamp(32px,5vw,48px)/1.15 'Caveat',cursive;
   margin-bottom:12px;color:var(--ink);
 }
-.hi{color:var(--accent)}
+.hi{color:var(--accent);display:inline-block;animation:wave 2s ease-in-out infinite}
+@keyframes wave{
+  0%,100%{transform:rotate(0deg)}
+  10%,30%{transform:rotate(14deg)}
+  20%,40%{transform:rotate(-8deg)}
+  50%{transform:rotate(0deg)}
+}
 .role{
   font:600 18px/1.4 Inter;color:var(--pencil);margin-bottom:24px;
 }
@@ -153,19 +173,24 @@ h1{
   padding:6px 12px;background:var(--highlight);color:var(--ink);
   border-radius:var(--radius);font:500 14px 'JetBrains Mono',monospace;
   border:1px solid rgba(13,27,42,.12);
+  transition:transform var(--transition);
 }
+.tag:hover{transform:translateY(-2px)}
 
 .side-sketch{
   background:white;padding:24px;border-radius:8px;
   border:2px solid var(--ink);box-shadow:4px 4px 0 var(--accent);
   font:16px/1.5 'Caveat',cursive;color:var(--pencil);
   position:relative;
+  animation:fadeInRight .6s ease;
+}
+@keyframes fadeInRight{
+  from{transform:translateX(20px);opacity:0}
+  to{transform:translateX(0);opacity:1}
 }
 .side-sketch:before{
-  content:'?';position:absolute;top:8px;right:12px;
-  width:28px;height:28px;border-radius:50%;border:2px solid var(--accent);
-  display:flex;align-items:center;justify-content:center;
-  font-weight:700;color:var(--accent);
+  content:'🎯';position:absolute;top:8px;right:12px;
+  width:28px;height:28px;font-size:20px;
 }
 .side-sketch h3{font-size:20px;margin-bottom:12px;color:var(--ink)}
 .side-sketch ul{list-style:none;margin-top:12px}
@@ -188,53 +213,115 @@ h1{
 }
 .sec-sub{color:var(--pencil);margin-bottom:40px}
 
+/* Project Filters */
+.filters{
+  display:flex;gap:12px;margin-bottom:32px;flex-wrap:wrap;
+}
+.filter-btn{
+  padding:8px 16px;background:white;border:2px solid var(--pencil);
+  border-radius:999px;font:500 14px 'JetBrains Mono',monospace;
+  cursor:pointer;transition:all var(--transition);color:var(--pencil);
+}
+.filter-btn:hover,.filter-btn.active{
+  background:var(--accent);border-color:var(--accent);color:white;
+  transform:translateY(-2px);box-shadow:var(--shadow);
+}
+
 .grid{
   display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:32px;
 }
 .card{
   background:white;padding:24px;border-radius:8px;
   border:2px solid var(--ink);box-shadow:var(--shadow);
-  position:relative;transition:transform var(--transition),box-shadow var(--transition);
+  position:relative;transition:all var(--transition);
+  opacity:0;animation:fadeInUp .5s ease forwards;
 }
-.card:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--accent)}
+@keyframes fadeInUp{
+  from{transform:translateY(20px);opacity:0}
+  to{transform:translateY(0);opacity:1}
+}
+.card:nth-child(1){animation-delay:.1s}
+.card:nth-child(2){animation-delay:.2s}
+.card:nth-child(3){animation-delay:.3s}
+.card:nth-child(4){animation-delay:.4s}
+.card:nth-child(5){animation-delay:.5s}
+.card:nth-child(6){animation-delay:.6s}
+.card:hover{transform:translate(-3px,-3px);box-shadow:8px 8px 0 var(--accent)}
 .card-label{
   position:absolute;top:-12px;left:16px;padding:4px 10px;
   background:var(--highlight);border:1px solid var(--ink);
   border-radius:var(--radius);font:600 12px 'JetBrains Mono',monospace;
 }
-.card h3{font:600 22px/1.3 Inter;margin-bottom:12px;color:var(--ink)}
+.card-header{display:flex;justify-content:space-between;align-items:start;margin-bottom:12px}
+.card h3{font:600 22px/1.3 Inter;color:var(--ink)}
+.card-icon{font-size:24px}
 .card p{color:var(--pencil);margin-bottom:16px;font-size:15px}
 .tech{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px}
 .tech span{
   padding:4px 10px;background:rgba(61,90,128,.08);color:var(--link);
   border-radius:999px;font:500 13px 'JetBrains Mono',monospace;
+  transition:transform var(--transition);
 }
+.tech span:hover{transform:scale(1.05)}
+.card-footer{display:flex;justify-content:space-between;align-items:center}
 .card a{
   display:inline-flex;align-items:center;gap:6px;color:var(--accent);
   text-decoration:none;font-weight:600;font-size:15px;
 }
 .card a:hover{text-decoration:underline}
+.metric{font:500 13px 'JetBrains Mono',monospace;color:var(--success)}
 
-/* Experience */
+/* Experience - Timeline */
 .exp{background:rgba(129,178,154,.05);padding:60px 20px}
 .timeline{max-width:900px;margin:0 auto}
+.journey-intro{
+  text-align:center;max-width:700px;margin:0 auto 48px;
+  padding:24px;background:white;border-radius:8px;
+  border:2px dashed var(--accent);
+}
+.journey-intro h3{
+  font:700 28px/1.2 'Caveat',cursive;color:var(--accent);margin-bottom:12px;
+}
+.journey-intro p{color:var(--pencil);font-size:16px}
+
 .tab{
-  background:white;padding:24px 24px 24px 40px;margin-bottom:24px;
+  background:white;padding:28px 28px 28px 44px;margin-bottom:28px;
   border-left:4px solid var(--accent);border-radius:var(--radius);
   box-shadow:var(--shadow);position:relative;
+  transition:all var(--transition);
+  opacity:0;animation:slideInLeft .5s ease forwards;
+}
+@keyframes slideInLeft{
+  from{transform:translateX(-30px);opacity:0}
+  to{transform:translateX(0);opacity:1}
+}
+.tab:nth-child(2){animation-delay:.1s}
+.tab:nth-child(3){animation-delay:.2s}
+.tab:nth-child(4){animation-delay:.3s}
+.tab:nth-child(5){animation-delay:.4s}
+.tab:nth-child(6){animation-delay:.5s}
+.tab:nth-child(7){animation-delay:.6s}
+.tab:nth-child(8){animation-delay:.7s}
+.tab:nth-child(9){animation-delay:.8s}
+.tab:hover{
+  transform:translateX(8px);
+  box-shadow:0 6px 20px rgba(13,27,42,.12);
 }
 .tab:before{
-  content:'';position:absolute;left:-10px;top:20px;
+  content:'';position:absolute;left:-10px;top:28px;
   width:12px;height:12px;background:var(--accent);border-radius:50%;
   border:3px solid var(--paper);
+  transition:transform var(--transition);
 }
-.tab h3{font:600 20px/1.3 Inter;margin-bottom:8px}
+.tab:hover:before{transform:scale(1.3)}
+.tab h3{font:600 20px/1.3 Inter;margin-bottom:10px;display:flex;align-items:center;gap:8px}
 .meta{
   display:flex;gap:16px;font:500 14px 'JetBrains Mono',monospace;
-  color:var(--pencil);margin-bottom:12px;flex-wrap:wrap;
+  color:var(--pencil);margin-bottom:14px;flex-wrap:wrap;
 }
+.story{color:var(--ink);margin-bottom:12px;font-style:italic;font-size:15px}
 .tab ul{margin-top:12px;padding-left:20px;color:var(--pencil)}
-.tab li{margin-bottom:6px}
+.tab li{margin-bottom:8px;line-height:1.6}
 
 /* Contact */
 .contact{max-width:1200px;margin:0 auto;padding:60px 20px}
@@ -244,7 +331,9 @@ h1{
   padding:28px;border-radius:8px;box-shadow:3px 3px 8px rgba(13,27,42,.15);
   border:2px solid rgba(13,27,42,.1);font-size:15px;color:var(--ink);
   position:relative;transform:rotate(-1deg);
+  transition:transform var(--transition);
 }
+.note:hover{transform:rotate(0deg) scale(1.02)}
 .note h3{font:700 24px/1.3 'Caveat',cursive;margin-bottom:12px}
 .note a{color:var(--ink);text-decoration:underline;font-weight:600}
 .socials{display:flex;gap:12px;margin-top:16px}
@@ -252,9 +341,9 @@ h1{
   width:44px;height:44px;background:white;border-radius:50%;
   display:flex;align-items:center;justify-content:center;
   border:2px solid var(--ink);text-decoration:none;color:var(--ink);
-  transition:transform var(--transition);font-size:18px;
+  transition:all var(--transition);font-size:18px;
 }
-.social:hover{transform:scale(1.1) rotate(5deg)}
+.social:hover{transform:scale(1.15) rotate(8deg);background:var(--accent);color:white}
 
 .form{background:white;padding:32px;border-radius:8px;border:2px dashed var(--pencil);box-shadow:var(--shadow)}
 .fg{margin-bottom:20px}
@@ -262,9 +351,12 @@ label{display:block;font-weight:600;margin-bottom:6px;font-size:15px}
 input,textarea{
   width:100%;padding:12px;border:2px solid var(--pencil);
   border-radius:var(--radius);font-family:inherit;font-size:15px;
-  transition:border-color var(--transition);
+  transition:all var(--transition);
 }
-input:focus,textarea:focus{outline:none;border-color:var(--accent)}
+input:focus,textarea:focus{
+  outline:none;border-color:var(--accent);
+  transform:translateY(-2px);box-shadow:0 4px 12px rgba(224,122,95,.2);
+}
 textarea{resize:vertical;min-height:120px}
 .submit{
   width:100%;padding:12px;background:var(--accent);color:var(--paper);
@@ -272,7 +364,7 @@ textarea{resize:vertical;min-height:120px}
   cursor:pointer;box-shadow:2px 2px 0 var(--ink);
   transition:transform var(--transition),box-shadow var(--transition);
 }
-.submit:hover{transform:translate(-1px,-1px);box-shadow:3px 3px 0 var(--ink)}
+.submit:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--ink)}
 
 footer{
   background:var(--ink);color:var(--paper);padding:32px 20px;text-align:center;
@@ -300,7 +392,7 @@ footer a{color:var(--highlight);text-decoration:none}
     <a class="logo" href="#top">Samir Guenchi</a>
     <nav>
       <a href="#projects">Projects</a>
-      <a href="#experience">Experience</a>
+      <a href="#experience">Journey</a>
       <a href="#contact">Contact</a>
       <a class="cv-btn" href="https://drive.google.com/uc?export=download&id=1xunML3vUxfK7LtsTeXv7OavHPwEGEmL9" download>Download CV</a>
     </nav>
@@ -309,237 +401,300 @@ footer a{color:var(--highlight);text-decoration:none}
 
 <section class="hero" id="top">
   <div class="sketch">
-    <h1><span class="hi">Hey, I'm Samir</span> — building intelligent systems for Arabic NLP</h1>
-    <p class="role">AI/ML Engineer • Competitive Programmer • RAG Systems Specialist</p>
+    <h1><span class="hi">Hey, I'm Samir</span> — teaching machines to understand Arabic</h1>
+    <p class="role">AI Engineer • Algorithm Coach • RAG Systems Builder</p>
     <p class="bio">
-      AI Engineering student at ENSIA researching Arabic Natural Language Processing and building retrieval-augmented generation (RAG) pipelines. 
-      Coach for Algeria's Olympiad in Informatics and Algorithm Teacher at El Ijtihad School, training the next generation of problem solvers.
+      Fourth-year AI student at ENSIA, diving deep into Arabic NLP since 2022. I spend my days building RAG systems that actually work, 
+      coaching future competitive programmers, and exploring how we can make AI understand low-resource languages like Arabic. 
+      Currently fascinated by semantic search and how context changes everything.
     </p>
     <div class="tags">
       <span class="tag">Python • C++ • Dart</span>
-      <span class="tag">NLP • RAG • ML</span>
-      <span class="tag">TensorFlow • LangChain</span>
-      <span class="tag">Flutter • React • Laravel</span>
-      <span class="tag">n8n • Firebase • MySQL</span>
+      <span class="tag">NLP • RAG • Transformers</span>
+      <span class="tag">LangChain • TensorFlow</span>
+      <span class="tag">Flutter • React</span>
+      <span class="tag">Always Learning ✨</span>
     </div>
   </div>
 
   <div class="side-sketch">
-    <h3>Current Focus</h3>
-    <p>Q4 2025 research priorities:</p>
+    <h3>What I'm Into Right Now</h3>
+    <p>Late 2025 priorities & curiosities:</p>
     <ul>
-      <li>Arabic semantic search at scale</li>
-      <li>Grounded RAG evaluation metrics</li>
-      <li>Olympiad prep (IOI 2026)</li>
-      <li>Open to research internships</li>
+      <li>Scaling Arabic semantic search</li>
+      <li>RAG hallucination detection</li>
+      <li>Prepping students for IOI 2026</li>
+      <li>Open to research collabs!</li>
     </ul>
   </div>
 </section>
 
 <section class="projects" id="projects">
-  <h2 class="sec-title">Selected Projects</h2>
-  <p class="sec-sub">Real systems solving real problems — with code and proofs. Try typing <code>projects</code> in the terminal!</p>
+  <h2 class="sec-title">Things I've Built</h2>
+  <p class="sec-sub">A mix of research experiments, real-world apps, and "what if?" explorations. Each taught me something new.</p>
+
+  <div class="filters">
+    <button class="filter-btn active" data-filter="all">All Projects</button>
+    <button class="filter-btn" data-filter="nlp">NLP & AI</button>
+    <button class="filter-btn" data-filter="web">Web & Mobile</button>
+    <button class="filter-btn" data-filter="algo">Algorithms</button>
+  </div>
 
   <div class="grid">
-    <article class="card">
+    <article class="card" data-category="nlp">
       <span class="card-label">Arabic NLP</span>
-      <h3>Ministry Regulation Q&A</h3>
-      <p>RAG system achieving 89% accuracy for Arabic question-answering on government regulations. Built semantic chunking, vector retrieval, and grounded generation pipeline.</p>
-      <div class="tech">
-        <span>Python</span><span>LangChain</span><span>Arabic NLP</span><span>Vector DB</span>
+      <div class="card-header">
+        <h3>Ministry Regulation Q&A</h3>
+        <span class="card-icon">🤖</span>
       </div>
-      <a href="https://github.com/Samir-Guenchi/Ministry-Regulation">View on GitHub →</a>
+      <p>Built a RAG system from scratch to answer questions about Algerian government regulations. Tackled Arabic tokenization challenges, experimented with embedding models, and finally hit 89% accuracy after weeks of iteration.</p>
+      <div class="tech">
+        <span>Python</span><span>LangChain</span><span>Arabic NLP</span><span>ChromaDB</span>
+      </div>
+      <div class="card-footer">
+        <a href="https://github.com/Samir-Guenchi/Ministry-Regulation">Explore Code →</a>
+        <span class="metric">89% accuracy</span>
+      </div>
     </article>
 
-    <article class="card">
+    <article class="card" data-category="web">
       <span class="card-label">Full-Stack</span>
-      <h3>Hospital Management System</h3>
-      <p>Complete MERN stack application for hospital operations including patient records, appointment scheduling, and inventory management.</p>
+      <div class="card-header">
+        <h3>Hospital Management System</h3>
+        <span class="card-icon">🏥</span>
+      </div>
+      <p>MERN stack app handling everything hospitals need — patient records, appointments, inventory. Built role-based access control and real-time notifications. Learned that healthcare UX is surprisingly complex.</p>
       <div class="tech">
         <span>MongoDB</span><span>Express</span><span>React</span><span>Node.js</span>
       </div>
-      <a href="https://github.com/Samir-Guenchi">View on GitHub →</a>
+      <div class="card-footer">
+        <a href="https://github.com/Samir-Guenchi">View Project →</a>
+        <span class="metric">4 user roles</span>
+      </div>
     </article>
 
-    <article class="card">
+    <article class="card" data-category="nlp">
       <span class="card-label">ML Pipeline</span>
-      <h3>BUPA Liver Disorder Analysis</h3>
-      <p>End-to-end ML pipeline with advanced feature engineering, model tuning, and ensemble methods. Achieved 95%+ accuracy with comprehensive evaluation.</p>
-      <div class="tech">
-        <span>Python</span><span>Scikit-learn</span><span>Pandas</span>
+      <div class="card-header">
+        <h3>Liver Disorder Analysis</h3>
+        <span class="card-icon">📊</span>
       </div>
-      <a href="https://github.com/Samir-Guenchi/BUPA-Liver-Disorder-Analysis">View on GitHub →</a>
+      <p>Deep dive into the BUPA dataset with ensemble methods. Implemented feature engineering, hyperparameter tuning, and cross-validation. The data was messy, which made it the perfect learning playground.</p>
+      <div class="tech">
+        <span>Python</span><span>Scikit-learn</span><span>Pandas</span><span>XGBoost</span>
+      </div>
+      <div class="card-footer">
+        <a href="https://github.com/Samir-Guenchi/BUPA-Liver-Disorder-Analysis">See Analysis →</a>
+        <span class="metric">95% accuracy</span>
+      </div>
     </article>
 
-    <article class="card">
-      <span class="card-label">Mobile ML</span>
-      <h3>QR Security Analyzer</h3>
-      <p>Flutter app with on-device ML to classify QR codes as safe or malicious. Uses heuristic security functions and TFLite inference.</p>
-      <div class="tech">
-        <span>Flutter</span><span>Dart</span><span>TFLite</span>
+    <article class="card" data-category="web">
+      <span class="card-label">Mobile Security</span>
+      <div class="card-header">
+        <h3>QR Security Scanner</h3>
+        <span class="card-icon">🔒</span>
       </div>
-      <a href="https://github.com/Samir-Guenchi/Qr_Analyzer">View on GitHub →</a>
+      <p>Flutter app that spots malicious QR codes before you scan them. Combined heuristic analysis with ML classification. Got featured in a local security workshop, which was cool.</p>
+      <div class="tech">
+        <span>Flutter</span><span>Dart</span><span>TFLite</span><span>Firebase</span>
+      </div>
+      <div class="card-footer">
+        <a href="https://github.com/Samir-Guenchi/Qr_Analyzer">Check it Out →</a>
+        <span class="metric">Real-time scan</span>
+      </div>
     </article>
 
-    <article class="card">
+    <article class="card" data-category="web">
       <span class="card-label">Mobile Health</span>
-      <h3>Healthcare Mobile App</h3>
-      <p>Cross-platform Flutter application with Firebase backend, secure authentication, and real-time health tracking features.</p>
-      <div class="tech">
-        <span>Flutter</span><span>Firebase</span><span>Dart</span>
+      <div class="card-header">
+        <h3>Healthcare Companion</h3>
+        <span class="card-icon">💊</span>
       </div>
-      <a href="https://github.com/Samir-Guenchi">View on GitHub →</a>
+      <p>Cross-platform health tracking app with medication reminders and appointment management. Focused on making medical data accessible and understandable for everyday users.</p>
+      <div class="tech">
+        <span>Flutter</span><span>Firebase</span><span>Cloud Functions</span>
+      </div>
+      <div class="card-footer">
+        <a href="https://github.com/Samir-Guenchi">Explore App →</a>
+        <span class="metric">Push notifications</span>
+      </div>
     </article>
 
-    <article class="card">
-      <span class="card-label">Algorithms</span>
-      <h3>AI Search Visualizer</h3>
-      <p>Interactive visualization of A*, BFS, DFS, and heuristic search. Real-time path rendering and performance metrics for teaching algorithms.</p>
+    <article class="card" data-category="algo">
+      <span class="card-label">Teaching Tool</span>
+      <div class="card-header">
+        <h3>Algorithm Visualizer</h3>
+        <span class="card-icon">🎨</span>
+      </div>
+      <p>Interactive playground for A*, BFS, DFS and more. Built this while teaching — watching algorithms run step-by-step makes abstract concepts click. My students love the path-finding demos.</p>
       <div class="tech">
         <span>Python</span><span>Pygame</span><span>Algorithms</span>
       </div>
-      <a href="https://github.com/Samir-Guenchi/Search_Algo">View on GitHub →</a>
+      <div class="card-footer">
+        <a href="https://github.com/Samir-Guenchi/Search_Algo">Try It Live →</a>
+        <span class="metric">6 algorithms</span>
+      </div>
     </article>
 
-    <article class="card">
+    <article class="card" data-category="nlp">
       <span class="card-label">Data Science</span>
-      <h3>Bank Marketing Analysis</h3>
-      <p>Predictive modeling for marketing campaign outcomes. Full pipeline from EDA to deployment-ready model with evaluation dashboard.</p>
-      <div class="tech">
-        <span>Python</span><span>Pandas</span><span>ML</span>
+      <div class="card-header">
+        <h3>Marketing Campaign Predictor</h3>
+        <span class="card-icon">📈</span>
       </div>
-      <a href="https://github.com/Samir-Guenchi/Bank-marketing-analysis">View on GitHub →</a>
+      <p>Analyzing bank marketing data to predict campaign success. Full EDA, feature selection, and model comparison. Learned that data storytelling matters as much as model accuracy.</p>
+      <div class="tech">
+        <span>Python</span><span>Pandas</span><span>Seaborn</span><span>ML</span>
+      </div>
+      <div class="card-footer">
+        <a href="https://github.com/Samir-Guenchi/Bank-marketing-analysis">Read Report →</a>
+        <span class="metric">10K+ records</span>
+      </div>
     </article>
 
-    <article class="card">
-      <span class="card-label">Blockchain</span>
-      <h3>Blockchain Experiments</h3>
-      <p>Smart contracts, consensus mechanisms, and decentralized apps exploring Web3 primitives and cryptographic protocols.</p>
-      <div class="tech">
-        <span>Solidity</span><span>Web3.js</span><span>Crypto</span>
+    <article class="card" data-category="algo">
+      <span class="card-label">Web3</span>
+      <div class="card-header">
+        <h3>Blockchain Lab</h3>
+        <span class="card-icon">⛓️</span>
       </div>
-      <a href="https://github.com/Samir-Guenchi/Blockchain">View on GitHub →</a>
+      <p>Smart contracts and consensus mechanism experiments. Built a simple proof-of-work chain to understand the fundamentals. Blockchain is fascinating when you build it yourself.</p>
+      <div class="tech">
+        <span>Solidity</span><span>Web3.js</span><span>Hardhat</span>
+      </div>
+      <div class="card-footer">
+        <a href="https://github.com/Samir-Guenchi/Blockchain">Explore Contracts →</a>
+        <span class="metric">PoW consensus</span>
+      </div>
     </article>
   </div>
 </section>
 
 <section class="exp" id="experience">
   <div class="timeline">
-    <h2 class="sec-title">Experience</h2>
-    <p class="sec-sub">Building, teaching, and researching at the intersection of AI and education.</p>
+    <h2 class="sec-title">My Journey So Far</h2>
+    <p class="sec-sub">From classroom curiosity to real-world impact — here's what I've been up to.</p>
+
+    <div class="journey-intro">
+      <h3>Four Years of Learning, Building & Teaching</h3>
+      <p>Started at ENSIA in 2021 with more questions than answers. Since then, I've worn many hats — researcher, developer, coach, teacher. Each role taught me something different about AI, people, and myself.</p>
+    </div>
 
     <div class="tab">
       <h3>👨‍🏫 Algorithm Teacher — El Ijtihad School</h3>
-      <div class="meta"><span>Teaching Role</span><span>Maghnia, Algeria</span></div>
-      <p>Teaching algorithms, programming fundamentals, and problem-solving strategies to students.</p>
+      <div class="meta"><span>Ongoing</span><span>Maghnia</span></div>
+      <p class="story">Where I learned that explaining algorithms clearly is harder than writing them. Teaching forces you to truly understand.</p>
       <ul>
-        <li>Algorithm design and analysis instruction</li>
-        <li>Programming basics and computational thinking</li>
-        <li>Preparing students for competitive programming</li>
+        <li>Breaking down complex algorithms into intuitive concepts</li>
+        <li>Designing hands-on coding exercises and problem sets</li>
+        <li>Watching students' "aha!" moments — never gets old</li>
       </ul>
     </div>
 
     <div class="tab">
-      <h3>💼 Freelance Developer</h3>
+      <h3>💼 Freelance AI Developer</h3>
       <div class="meta"><span>2024–Present</span><span>Remote</span></div>
-      <p>Developing AI agents, applications, and automation solutions for clients.</p>
+      <p class="story">Building custom AI agents and automation pipelines for clients. Each project is a new puzzle to solve.</p>
       <ul>
-        <li>AI agents for automated content generation</li>
-        <li>Application development and management</li>
-        <li>Custom automation workflows using n8n</li>
+        <li>AI agents for content generation and workflow automation</li>
+        <li>n8n workflows that save hours of manual work</li>
+        <li>Learning to balance technical excellence with client needs</li>
       </ul>
     </div>
 
     <div class="tab">
       <h3>💻 IT Intern — ENOF Maghnia</h3>
-      <div class="meta"><span>September 2025</span><span>Maghnia, Algeria</span></div>
-      <p>Network optimization and application enhancement for enterprise systems.</p>
+      <div class="meta"><span>September 2025</span><span>Maghnia</span></div>
+      <p class="story">Month-long deep dive into enterprise systems. Optimized network performance and reimagined application UX.</p>
       <ul>
-        <li>Optimized network performance and infrastructure</li>
-        <li>Enhanced application UI/UX for better user experience</li>
-        <li>Automated repetitive tasks using n8n workflow automation</li>
+        <li>Network diagnostics and performance optimization</li>
+        <li>UI/UX redesign for internal management tools</li>
+        <li>Automated repetitive tasks — because life's too short for manual work</li>
       </ul>
     </div>
 
     <div class="tab">
-      <h3>🌐 Web Developer Intern — HR Technology</h3>
+      <h3>🌐 Web Dev Intern — HR Technology</h3>
       <div class="meta"><span>2024</span><span>Algeria</span></div>
-      <p>Full-stack development of project management platform.</p>
+      <p class="story">My first real-world dev experience. Built a project management platform from the ground up.</p>
       <ul>
-        <li>Developed project management platform using React, Laravel, and MySQL</li>
-        <li>Implemented user authentication and role-based access control</li>
-        <li>Built responsive UI components and RESTful APIs</li>
+        <li>Full-stack development with React, Laravel, and MySQL</li>
+        <li>Role-based access control and secure authentication</li>
+        <li>RESTful APIs and responsive design principles</li>
       </ul>
     </div>
 
     <div class="tab">
       <h3>🏆 Coach — Algerian Olympiad in Informatics</h3>
-      <div class="meta"><span>2025–Present</span><span>National Team</span></div>
-      <p>Training high school students in competitive programming for IOI and regional contests.</p>
+      <div class="meta"><span>2025–Present</span><span>National Program</span></div>
+      <p class="story">Preparing Algeria's brightest minds for international competitions. High pressure, high reward.</p>
       <ul>
-        <li>Advanced algorithms: graph theory, dynamic programming, data structures</li>
-        <li>Prepared students for top rankings in national competitions</li>
-        <li>Developed comprehensive training materials and curated problem sets</li>
+        <li>Weekly training sessions on graph theory, DP, and data structures</li>
+        <li>Mentoring students through their competitive programming journey</li>
+        <li>Curating problem sets that challenge and inspire</li>
       </ul>
     </div>
 
     <div class="tab">
-      <h3>🤝 Volunteer — Algerian Olympiad in Artificial Intelligence</h3>
+      <h3>🤝 Volunteer — Algerian AI Olympiad</h3>
       <div class="meta"><span>2025</span><span>Algeria</span></div>
-      <p>Content creation and training for AI competition participants.</p>
+      <p class="story">Helping spread AI literacy across Algeria. Created educational content that makes ML accessible.</p>
       <ul>
-        <li>Prepared educational content and training resources</li>
-        <li>Mentored students in AI fundamentals and ML concepts</li>
-        <li>Developed workshop materials for AI competitions</li>
+        <li>Designing beginner-friendly AI tutorials and workshops</li>
+        <li>Mentoring students exploring their first ML projects</li>
+        <li>Building resources that demystify "scary" AI concepts</li>
       </ul>
     </div>
 
     <div class="tab">
       <h3>⚙️ IT Manager — EBEC Scientific Club</h3>
       <div class="meta"><span>2024</span><span>ENSIA</span></div>
-      <p>Led IT department operations and team management.</p>
+      <p class="story">Led the tech side of a student organization. Learned that managing people is very different from managing code.</p>
       <ul>
-        <li>Managed IT infrastructure and technical projects</li>
-        <li>Coordinated team tasks and delegated responsibilities</li>
-        <li>Facilitated knowledge sharing and technical training</li>
+        <li>Coordinated technical projects across multiple teams</li>
+        <li>Managed club infrastructure and digital presence</li>
+        <li>Organized knowledge-sharing sessions and workshops</li>
       </ul>
     </div>
 
     <div class="tab">
       <h3>🤖 Research Member — ENSIA-AI Lab</h3>
       <div class="meta"><span>2022–Present</span><span>Research</span></div>
-      <p>Conducting research in Arabic NLP, retrieval-augmented generation, and ML applications for low-resource languages.</p>
+      <p class="story">Where my AI journey really began. Three years of experimenting with Arabic NLP and RAG systems.</p>
       <ul>
-        <li>Arabic text processing and semantic search</li>
-        <li>RAG systems evaluation and grounding metrics</li>
-        <li>Collaborating on AI research papers and open-source contributions</li>
+        <li>Researching semantic search for low-resource languages</li>
+        <li>Building and evaluating RAG pipelines with grounding metrics</li>
+        <li>Contributing to research papers and open-source NLP tools</li>
+        <li>Weekly lab meetings where we challenge each other's ideas</li>
       </ul>
     </div>
 
     <div class="tab">
       <h3>🎓 AI Engineering Student — ENSIA</h3>
-      <div class="meta"><span>2022–Present</span><span>Algiers, Algeria</span></div>
-      <p>4-Year Engineering Program in Artificial Intelligence & Data Science at National Higher School of Artificial Intelligence.</p>
+      <div class="meta"><span>2021–Present</span><span>Algiers</span></div>
+      <p class="story">Four years at Algeria's top AI school. From struggling with my first neural network to building production RAG systems.</p>
       <ul>
-        <li>Specializing in AI/ML with focus on Arabic NLP</li>
-        <li>Active in ENSIA-AI research lab and student organizations (EBEC)</li>
-        <li>Leading multiple technical and research projects</li>
+        <li>4-year engineering program in AI and Data Science</li>
+        <li>Deep focus on NLP, ML systems, and software engineering</li>
+        <li>Active in research lab, tech clubs, and competitive programming</li>
+        <li>Learning that real AI is messy, fascinating, and endlessly challenging</li>
       </ul>
     </div>
   </div>
 </section>
 
 <section class="contact" id="contact">
-  <h2 class="sec-title">Get in Touch</h2>
-  <p class="sec-sub">Open for research collaborations, internships, and technical discussions. Or just type <code>contact</code> in the terminal!</p>
+  <h2 class="sec-title">Let's Talk</h2>
+  <p class="sec-sub">Research collaborations, internship opportunities, or just geeking out about NLP — I'm all ears.</p>
 
   <div class="contact-grid">
     <div class="note">
-      <h3>Let's connect!</h3>
+      <h3>Hit me up!</h3>
       <p><strong>Email:</strong> <a href="mailto:samir.guenchi@ensia.edu.dz">samir.guenchi@ensia.edu.dz</a></p>
       <p><strong>Phone:</strong> <a href="tel:0790789304">0790 789 304</a></p>
-      <p><strong>Location:</strong> Maghnia, Tlemcen, Algeria 🇩🇿</p>
-      <p><strong>Status:</strong> Open for internships & research positions</p>
+      <p><strong>Based in:</strong> Maghnia, Tlemcen 🇩🇿</p>
+      <p><strong>Status:</strong> Actively seeking research opportunities</p>
       <div class="socials">
         <a href="https://www.linkedin.com/in/guenchi-samir" class="social" title="LinkedIn">in</a>
         <a href="https://github.com/Samir-Guenchi" class="social" title="GitHub">gh</a>
@@ -559,11 +714,11 @@ footer a{color:var(--highlight);text-decoration:none}
       </div>
       <div class="fg">
         <label for="subject">Subject</label>
-        <input type="text" id="subject" required placeholder="Collaboration / Research / Opportunity">
+        <input type="text" id="subject" required placeholder="What's on your mind?">
       </div>
       <div class="fg">
         <label for="message">Message</label>
-        <textarea id="message" required placeholder="Tell me about your project..."></textarea>
+        <textarea id="message" required placeholder="Tell me about your project, idea, or just say hi..."></textarea>
       </div>
       <button type="submit" class="submit">Send Message</button>
     </form>
@@ -571,7 +726,7 @@ footer a{color:var(--highlight);text-decoration:none}
 </section>
 
 <footer>
-  <p>© 2025 Samir Guenchi · Built from scratch, no templates · <a href="https://github.com/Samir-Guenchi">View source</a></p>
+  <p>© 2025 Samir Guenchi · Handcrafted with curiosity & coffee ☕ · <a href="https://github.com/Samir-Guenchi">View source</a></p>
 </footer>
 
 <!-- Terminal -->
@@ -583,7 +738,7 @@ footer a{color:var(--highlight);text-decoration:none}
     <button class="term-close" id="termClose" aria-label="Close terminal"></button>
   </div>
   <div class="term-output" id="termOutput">
-    <div class="term-line"><span class="term-info">Welcome to Samir's Portfolio Terminal v1.0</span></div>
+    <div class="term-line"><span class="term-info">Welcome to Samir's Portfolio Terminal v2.0</span></div>
     <div class="term-line"><span class="term-info">Type 'help' for available commands</span></div>
   </div>
   <div class="term-input-wrap">
@@ -609,17 +764,17 @@ const commands = {
   • <span class="term-cmd">contact</span>   - Get contact info
   • <span class="term-cmd">github</span>    - Open GitHub profile
   • <span class="term-cmd">linkedin</span>  - Open LinkedIn
-  • <span class="term-cmd">whoami</span>    - Easter egg
+  • <span class="term-cmd">coffee</span>    - Easter egg
   • <span class="term-cmd">clear</span>     - Clear terminal
   • <span class="term-cmd">exit</span>      - Close terminal`,
   
   about: () => `<span class="term-info">Samir Guenchi</span>
-  → AI Engineering Student @ ENSIA (Algeria)
-  → AI/ML Engineer specializing in Arabic NLP
-  → Competitive Programmer & IOI Coach
+  → AI Engineering Student @ ENSIA (since 2021)
+  → Research focus: Arabic NLP & RAG systems
+  → Competitive Programming Coach
   → Algorithm Teacher at El Ijtihad School
-  → Building RAG systems & intelligent applications
-  → Open for research internships & collaborations`,
+  → Building intelligent systems for low-resource languages
+  → Always learning, always curious 🚀`,
   
   cv: () => {
     window.open('https://drive.google.com/uc?export=download&id=1xunML3vUxfK7LtsTeXv7OavHPwEGEmL9', '_blank');
@@ -627,64 +782,61 @@ const commands = {
   },
   
   projects: () => `<span class="term-info">Featured Projects:</span>
-  1. <span class="term-cmd">Ministry Regulation Q&A</span> - Arabic RAG system (89% accuracy)
-  2. <span class="term-cmd">Hospital Management System</span> - Full MERN stack app
-  3. <span class="term-cmd">BUPA Liver Analysis</span> - ML pipeline & ensemble methods
-  4. <span class="term-cmd">QR Security Analyzer</span> - Mobile ML with TFLite
-  5. <span class="term-cmd">Healthcare Mobile App</span> - Flutter + Firebase
-  6. <span class="term-cmd">AI Search Visualizer</span> - Interactive algorithm viz
-  7. <span class="term-cmd">Bank Marketing Analysis</span> - Predictive modeling
-  8. <span class="term-cmd">Blockchain Experiments</span> - Smart contracts & Web3
+  1. <span class="term-cmd">Ministry Regulation Q&A</span> - Arabic RAG (89% accuracy)
+  2. <span class="term-cmd">Hospital Management</span> - Full MERN stack
+  3. <span class="term-cmd">Liver Disorder Analysis</span> - ML pipeline (95%)
+  4. <span class="term-cmd">QR Security Scanner</span> - Mobile ML security
+  5. <span class="term-cmd">Healthcare App</span> - Flutter + Firebase
+  6. <span class="term-cmd">Algorithm Visualizer</span> - Teaching tool
+  7. <span class="term-cmd">Marketing Predictor</span> - Data science
+  8. <span class="term-cmd">Blockchain Lab</span> - Web3 experiments
   
-  <span class="term-info">→ Visit GitHub for full portfolio: github.com/Samir-Guenchi</span>`,
+  <span class="term-info">→ Full portfolio: github.com/Samir-Guenchi</span>`,
   
-  skills: () => `<span class="term-info">Technical Stack:</span>
+  skills: () => `<span class="term-info">Technical Arsenal:</span>
   Languages: Python, C++, JavaScript, Dart, SQL
-  ML/AI: TensorFlow, PyTorch, LangChain, Scikit-learn
-  NLP: Arabic NLP, RAG, Semantic Search, Transformers
+  AI/ML: TensorFlow, PyTorch, LangChain, Scikit-learn
+  NLP: Arabic NLP, RAG, Transformers, Semantic Search
   Web: React, Laravel, Node.js, Express, MySQL
   Mobile: Flutter, Firebase, Supabase
-  Tools: Git, n8n, Docker, Linux, Jupyter, VS Code
+  Tools: Git, n8n, Docker, Linux, Jupyter
   Blockchain: Solidity, Web3.js
   
-  <span class="term-info">Specializations:</span>
+  <span class="term-info">Superpowers:</span>
   • Arabic Natural Language Processing
-  • Retrieval-Augmented Generation (RAG)
-  • Machine Learning & Deep Learning
-  • Competitive Programming & Algorithms
+  • Retrieval-Augmented Generation
+  • Competitive Programming & Teaching
   • Full-Stack Development`,
   
-  contact: () => `<span class="term-info">Contact Information:</span>
-  📧 Email: samir.guenchi@ensia.edu.dz
-  📱 Phone: 0790 789 304
-  💼 LinkedIn: linkedin.com/in/guenchi-samir
-  🐙 GitHub: github.com/Samir-Guenchi
-  📊 Kaggle: kaggle.com/guenchisamir
-  💻 Codeforces: codeforces.com/profile/Guenchi_Samir_ia
-  📍 Location: Maghnia, Tlemcen, Algeria`,
+  contact: () => `<span class="term-info">Let's connect:</span>
+  📧 samir.guenchi@ensia.edu.dz
+  📱 0790 789 304
+  💼 linkedin.com/in/guenchi-samir
+  🐙 github.com/Samir-Guenchi
+  📊 kaggle.com/guenchisamir
+  💻 codeforces.com/profile/Guenchi_Samir_ia
+  📍 Maghnia, Tlemcen, Algeria`,
   
   github: () => {
     window.open('https://github.com/Samir-Guenchi', '_blank');
-    return `<span class="term-info">✓ Opening GitHub profile...</span>`;
+    return `<span class="term-info">✓ Opening GitHub...</span>`;
   },
   
   linkedin: () => {
     window.open('https://www.linkedin.com/in/guenchi-samir', '_blank');
-    return `<span class="term-info">✓ Opening LinkedIn profile...</span>`;
+    return `<span class="term-info">✓ Opening LinkedIn...</span>`;
   },
   
-  whoami: () => `<span class="term-info">You are viewing the portfolio of:</span>
+  coffee: () => `<span class="term-info">☕ Coffee Status:</span>
   
-   ██████╗ ██╗   ██╗███████╗███╗   ██╗ ██████╗██╗  ██╗██╗
-  ██╔════╝ ██║   ██║██╔════╝████╗  ██║██╔════╝██║  ██║██║
-  ██║  ███╗██║   ██║█████╗  ██╔██╗ ██║██║     ███████║██║
-  ██║   ██║██║   ██║██╔══╝  ██║╚██╗██║██║     ██╔══██║██║
-  ╚██████╔╝╚██████╔╝███████╗██║ ╚████║╚██████╗██║  ██║██║
-   ╚═════╝  ╚═════╝ ╚══════╝╚═╝  ╚═══╝ ╚═════╝╚═╝  ╚═╝╚═╝
+  [████████████████████░] 95%
   
-  <span class="term-cmd">Samir Guenchi</span> - AI Engineer & Problem Solver
+  <span class="term-cmd">Current brew:</span> Strong Arabic coffee
+  <span class="term-cmd">Lines coded today:</span> ${Math.floor(Math.random()*500)+200}
+  <span class="term-cmd">Bugs created:</span> Probably fewer than yesterday
+  <span class="term-cmd">Mood:</span> Caffeinated & Ready 🚀
   
-  <span class="term-info">"Building intelligent systems, one algorithm at a time."</span>`,
+  <span class="term-info">"Code is poetry, coffee is fuel."</span>`,
   
   clear: () => {
     termOutput.innerHTML = '';
@@ -733,12 +885,35 @@ termInput.addEventListener('keydown', (e) => {
   }
 });
 
+// Project Filters
+const filterBtns = document.querySelectorAll('.filter-btn');
+const cards = document.querySelectorAll('.card');
+
+filterBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    // Update active state
+    filterBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    
+    const filter = btn.dataset.filter;
+    
+    cards.forEach(card => {
+      if (filter === 'all' || card.dataset.category === filter) {
+        card.style.display = 'block';
+        card.style.animation = 'fadeInUp .5s ease forwards';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  });
+});
+
 // Form handler
 document.getElementById('contactForm').addEventListener('submit',e=>{
   e.preventDefault();
   const f=e.target,d={name:f.name.value,email:f.email.value,subject:f.subject.value,message:f.message.value};
   window.location.href=`mailto:samir.guenchi@ensia.edu.dz?subject=${encodeURIComponent(d.subject)}&body=${encodeURIComponent(`Name: ${d.name}\nEmail: ${d.email}\n\nMessage:\n${d.message}`)}`;
-  f.reset();alert('Your email client will open shortly!');
+  f.reset();alert('Opening your email client...');
 });
 
 // Smooth scroll
